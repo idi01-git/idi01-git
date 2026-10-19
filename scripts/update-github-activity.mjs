@@ -190,6 +190,31 @@ function makeHeatmap(calendar) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="GitHub contribution heatmap for ${username}">
   <defs>
+    <linearGradient id="taper-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.05"/>
+      <stop offset="12%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="35%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="65%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="88%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="taper-core" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.1"/>
+      <stop offset="20%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="42%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="58%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="taper-white" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3345" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff3345" stop-opacity="0"/>
+    </linearGradient>
     <filter id="header-glow" x="-20%" y="-400%" width="140%" height="900%">
       <feGaussianBlur stdDeviation="3.5" result="blur1"/>
       <feGaussianBlur stdDeviation="1.5" result="blur2"/>
@@ -203,11 +228,11 @@ function makeHeatmap(calendar) {
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="${contentLeft}" y="52">CONTRIBUTION CALENDAR</text>
   <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
-  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.35" filter="url(#header-glow)"/>
-  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff2238" stroke-width="6" stroke-opacity="0.75" filter="url(#header-glow)"/>
-  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
-  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff5967" stroke-width="1.6"/>
-  <line x1="${contentLeft + 100}" y1="70" x2="${contentRight - 100}" y2="70" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
+  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
+  <path d="M${contentLeft} 70 Q${(contentLeft + contentRight) / 2} 62 ${contentRight} 70 Q${(contentLeft + contentRight) / 2} 78 ${contentLeft} 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
+  <path d="M${contentLeft} 70 Q${(contentLeft + contentRight) / 2} 66.5 ${contentRight} 70 Q${(contentLeft + contentRight) / 2} 73.5 ${contentLeft} 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
+  <path d="M${contentLeft + 30} 70 Q${(contentLeft + contentRight) / 2} 68.4 ${contentRight - 30} 70 Q${(contentLeft + contentRight) / 2} 71.6 ${contentLeft + 30} 70 Z" fill="url(#taper-core)"/>
+  <path d="M${(contentLeft + contentRight) / 2 - 380} 70 Q${(contentLeft + contentRight) / 2} 69.1 ${(contentLeft + contentRight) / 2 + 380} 70 Q${(contentLeft + contentRight) / 2} 70.9 ${(contentLeft + contentRight) / 2 - 380} 70 Z" fill="url(#taper-white)" opacity="0.95"/>
   <g class="months">${monthLabels.join('')}</g>
   <g class="weekdays">
     <text class="weekday" x="${weekdayAnchorX}" y="167" text-anchor="end">MON</text>
@@ -309,6 +334,31 @@ function makeActivityGraph(calendar) {
       <stop offset="0.6" stop-color="#e51d2b" stop-opacity=".12"/>
       <stop offset="1" stop-color="#e51d2b" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="taper-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.05"/>
+      <stop offset="12%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="35%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="65%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="88%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="taper-core" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.1"/>
+      <stop offset="20%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="42%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="58%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="taper-white" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3345" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff3345" stop-opacity="0"/>
+    </linearGradient>
     <filter id="header-glow" x="-20%" y="-400%" width="140%" height="900%">
       <feGaussianBlur stdDeviation="3.5" result="blur1"/>
       <feGaussianBlur stdDeviation="1.5" result="blur2"/>
@@ -322,11 +372,11 @@ function makeActivityGraph(calendar) {
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">ACTIVITY TRACE · LAST 12 MONTHS</text>
   <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">PEAK ${peak}/WK</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
-  <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.35" filter="url(#header-glow)"/>
-  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff2238" stroke-width="6" stroke-opacity="0.75" filter="url(#header-glow)"/>
-  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
-  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff5967" stroke-width="1.6"/>
-  <line x1="140" y1="70" x2="1634" y2="70" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
+  <path d="M40 70 Q887 62 1734 70 Q887 78 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
+  <path d="M40 70 Q887 66.5 1734 70 Q887 73.5 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
+  <path d="M70 70 Q887 68.4 1704 70 Q887 71.6 70 70 Z" fill="url(#taper-core)"/>
+  <path d="M507 70 Q887 69.1 1267 70 Q887 70.9 507 70 Z" fill="url(#taper-white)" opacity="0.95"/>
   <g>${grid}</g>
   <path d="${area}" fill="url(#area-fill)"/>
   <path d="${line}" fill="none" stroke="#f12638" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>

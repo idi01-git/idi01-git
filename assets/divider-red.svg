@@ -1,5 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1774" height="28" viewBox="0 0 1774 28" role="img" aria-label="Berserk themed crimson glowing full-width divider">
   <defs>
+    <!-- Tapered glow gradient: high-intensity crimson in center, smooth fade to ends -->
+    <linearGradient id="taper-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.05"/>
+      <stop offset="12%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="35%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="65%" stop-color="#ff2238" stop-opacity="0.85"/>
+      <stop offset="88%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.05"/>
+    </linearGradient>
+
+    <!-- Tapered razor core gradient -->
+    <linearGradient id="taper-core" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.1"/>
+      <stop offset="20%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="42%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="58%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#ff2238" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.1"/>
+    </linearGradient>
+
+    <!-- White-hot center flare gradient -->
+    <linearGradient id="taper-white" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3345" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="75%" stop-color="#ff5967" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff3345" stop-opacity="0"/>
+    </linearGradient>
+
     <!-- High-intensity crimson blur filter -->
     <filter id="crimson-glow-strong" x="-20%" y="-400%" width="140%" height="900%">
       <feGaussianBlur stdDeviation="3.5" result="blur1"/>
@@ -19,20 +50,20 @@
     </radialGradient>
   </defs>
 
-  <!-- Full-width deep ambient crimson glow (spans entire 1774 width) -->
-  <line x1="0" y1="14" x2="1774" y2="14" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.4" filter="url(#crimson-glow-strong)"/>
+  <!-- Continuous subtle crimson baseline across full 1774 span -->
+  <line x1="0" y1="14" x2="1774" y2="14" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
 
-  <!-- Full-width focused scarlet beam (spans entire 1774 width) -->
-  <line x1="0" y1="14" x2="1774" y2="14" stroke="#ff2238" stroke-width="6" stroke-opacity="0.8" filter="url(#crimson-glow-strong)"/>
+  <!-- Tapered ambient glow: thick in center (16px), tapering to fine points at ends -->
+  <path d="M0 14 Q887 6 1774 14 Q887 22 0 14 Z" fill="url(#taper-glow)" filter="url(#crimson-glow-strong)" opacity="0.65"/>
 
-  <!-- Full-width solid razor crimson core -->
-  <line x1="0" y1="14" x2="1774" y2="14" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
+  <!-- Tapered focused scarlet beam: thick in center (7px), tapering to 0 at ends -->
+  <path d="M0 14 Q887 10.5 1774 14 Q887 17.5 0 14 Z" fill="url(#taper-glow)" filter="url(#crimson-glow-strong)" opacity="0.95"/>
 
-  <!-- Full-width bright scarlet hot filament -->
-  <line x1="0" y1="14" x2="1774" y2="14" stroke="#ff5967" stroke-width="1.6"/>
+  <!-- Tapered razor core: thick in center (3.2px), tapering to 0 at ends -->
+  <path d="M40 14 Q887 12.4 1734 14 Q887 15.6 40 14 Z" fill="url(#taper-core)"/>
 
-  <!-- White-hot laser filament across center span -->
-  <line x1="300" y1="14" x2="1474" y2="14" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
+  <!-- White-hot center filament: central span (1.8px in center) -->
+  <path d="M500 14 Q887 13.1 1274 14 Q887 14.9 500 14 Z" fill="url(#taper-white)" opacity="0.95"/>
 
   <!-- Left Side Design: Berserk Manga Panel Brackets & Hard Edge End Cap -->
   <polygon points="0,3 12,3 12,25 0,25" fill="#e51d2b"/>
