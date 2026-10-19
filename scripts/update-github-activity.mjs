@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,6 +9,7 @@ const outputDir = previewMode
   ? path.resolve(projectRoot, '..', 'profile-preview-assets')
   : path.join(projectRoot, 'assets');
 const dataPath = path.join(projectRoot, 'data', 'github-contributions.json');
+const readmePath = path.join(projectRoot, 'README.md');
 const username = 'idi01-git';
 
 function escapeXml(value) {
@@ -258,6 +259,13 @@ await mkdir(outputDir, { recursive: true });
 await writeFile(path.join(outputDir, 'github-contribution-heatmap.svg'), makeHeatmap(calendar), 'utf8');
 await writeFile(path.join(outputDir, 'github-activity-graph.svg'), makeActivityGraph(calendar), 'utf8');
 if (!previewMode && !emptyMode) {
+  const cacheVersion = (process.env.GITHUB_RUN_ID || new Date().toISOString()).replace(/[^0-9A-Za-z]/g, '');
+  const readme = await readFile(readmePath, 'utf8');
+  const cacheBustedReadme = readme.replace(
+    /(\.\/assets\/github-(?:contribution-heatmap|activity-graph)\.svg)(?:\?v=[^"&\s]*)?/g,
+    `$1?v=${cacheVersion}`,
+  );
+  if (cacheBustedReadme !== readme) await writeFile(readmePath, cacheBustedReadme, 'utf8');
   await mkdir(path.dirname(dataPath), { recursive: true });
   await writeFile(dataPath, `${JSON.stringify({ username, ...calendar, updatedAt: new Date().toISOString() }, null, 2)}\n`, 'utf8');
 }
