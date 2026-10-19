@@ -1,10 +1,13 @@
+import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const assetsDir = path.join(projectRoot, 'assets');
-const backgroundPath = path.join(assetsDir, 'competitive-programming-berserk-background-v3.webp');
+const bgJpg = path.join(assetsDir, 'competitive-programming-berserk-background-v3.jpg');
+const bgWebp = path.join(assetsDir, 'competitive-programming-berserk-background-v3.webp');
+const backgroundPath = existsSync(bgJpg) ? bgJpg : bgWebp;
 const overlayPath = path.join(assetsDir, 'competitive-programming-stats-overlay-v3.svg');
 const outputPath = path.join(assetsDir, 'competitive-programming-live.svg');
 const statsPath = path.join(projectRoot, 'data', 'competitive-programming-stats.json');
@@ -74,14 +77,16 @@ for (const key of displayKeys) {
 const updatedBody = getSvgBody(overlay);
 if (!updatedBody) throw new Error(`Could not parse the updated SVG overlay at ${overlayPath}`);
 const imageData = background.toString('base64');
+const mimeType = backgroundPath.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
 const svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-labelledby="title description">
   <title id="title">Shivang's competitive programming stats</title>
   <desc id="description">A code-generated SVG overlay on the Berserk-themed art, with live values supplied by the stats updater.</desc>
-  <image x="0" y="0" width="1774" height="887" preserveAspectRatio="none" href="data:image/webp;base64,${imageData}" />
+  <image x="0" y="0" width="1774" height="887" preserveAspectRatio="none" href="data:${mimeType};base64,${imageData}" xlink:href="data:${mimeType};base64,${imageData}" />
   ${updatedBody}
 </svg>
 `;
 
 await writeFile(outputPath, svg, 'utf8');
 console.log(`Wrote ${path.relative(projectRoot, outputPath)}`);
+

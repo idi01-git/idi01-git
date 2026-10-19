@@ -12,7 +12,7 @@
 
   <!-- LeetCode card overlay; centered on the first blank card. -->
   <g id="leetcode-card" transform="translate(194 0)">
-    <image x="-33" y="500" width="66" height="78" href="__LEETCODE_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+    <image x="-33" y="500" width="66" height="78" href="__LEETCODE_LOGO__" xlink:href="__LEETCODE_LOGO__" preserveAspectRatio="xMidYMid meet"/>
     <text class="brand-name" x="0" y="608" text-anchor="middle">LeetCode</text>
     <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
     <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
@@ -23,7 +23,7 @@
 
   <!-- CodeChef card overlay; centered on the second blank card. -->
   <g id="codechef-card" transform="translate(535 0)">
-    <image x="-34" y="505" width="68" height="68" href="__CODECHEF_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+    <image x="-34" y="505" width="68" height="68" href="__CODECHEF_LOGO__" xlink:href="__CODECHEF_LOGO__" preserveAspectRatio="xMidYMid meet"/>
     <text class="brand-name" x="0" y="608" text-anchor="middle">CodeChef</text>
     <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
     <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
