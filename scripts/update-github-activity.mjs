@@ -373,8 +373,8 @@ function makeActivityGraph(calendar) {
     </filter>
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
-  <text class="eyebrow" x="40" y="52">ACTIVITY TRACE · LAST 12 MONTHS</text>
-  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-peak-label">PEAK</tspan> <tspan class="meta-peak-val">${peak}/WK</tspan></text>
+  <text class="eyebrow" x="40" y="52"><tspan class="eyebrow-main">ACTIVITY TRACE</tspan><tspan class="eyebrow-sep" dx="14">·</tspan><tspan class="eyebrow-sub" dx="14">LAST 12 MONTHS</tspan></text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-peak-label">PEAK</tspan><tspan class="meta-peak-val" dx="12">${peak}/WK</tspan></text>
   <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
   <path d="M40 70 Q887 62 1734 70 Q887 78 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
   <path d="M40 70 Q887 66.5 1734 70 Q887 73.5 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
@@ -389,11 +389,14 @@ function makeActivityGraph(calendar) {
   <text class="footer" x="1734" y="${height - 26}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: #aaa1a4; font-size: 18px; letter-spacing: .8px; }
-    .eyebrow { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
-    .meta-peak-label { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 1.5px; }
-    .meta-peak-val { fill: #ff2238; font-size: 22px; font-weight: 800; letter-spacing: 1.2px; }
+    .eyebrow { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .eyebrow-main { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
+    .eyebrow-sep { fill: #ff2238; font-size: 18px; font-weight: 700; }
+    .eyebrow-sub { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
+    .meta-peak-label { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 1.6px; }
+    .meta-peak-val { fill: #ff2238; font-size: 22px; font-weight: 800; letter-spacing: 1.4px; }
     .y-label, .x-label { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 0.8px; }
-    .footer { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 1.2px; }
+    .footer { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 1.4px; word-spacing: 6px; }
   </style>
 </svg>`;
 }
