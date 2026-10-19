@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="340" viewBox="0 0 1774 340" role="img" aria-label="Weekly GitHub activity graph for idi01-git">
+  <defs>
+    <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e51d2b" stop-opacity=".36"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient>
+    <linearGradient id="rule" x1="0" x2="1"><stop stop-color="#e51d2b" stop-opacity="0"/><stop offset=".5" stop-color="#e51d2b" stop-opacity=".85"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="14" fill="#080708"/>
+  <text class="eyebrow" x="44" y="42">ACTIVITY TRACE</text>
+  <text class="meta" x="1730" y="42" text-anchor="end">0 CONTRIBUTIONS · PEAK WEEK 0 · FIRST LIVE REFRESH PENDING</text>
+  <path d="M44 54H1730" stroke="url(#rule)" stroke-width="1"/>
+  <g><path d="M96 94H1720" stroke="#2b2023" stroke-width="1"/><text class="y-label" x="78" y="98" text-anchor="end">1</text>
+    <path d="M96 156.7H1720" stroke="#2b2023" stroke-width="1"/><text class="y-label" x="78" y="160.7" text-anchor="end">1</text>
+    <path d="M96 219.4H1720" stroke="#2b2023" stroke-width="1"/><text class="y-label" x="78" y="223.4" text-anchor="end">0</text>
+    <path d="M96 284H1720" stroke="#2b2023" stroke-width="1"/><text class="y-label" x="78" y="288" text-anchor="end">0</text></g>
+  <path d="M96.0 284.0 C101.2 284.0 116.8 284.0 127.2 284.0  C137.6 284.0 148.1 284.0 158.5 284.0  C168.9 284.0 179.3 284.0 189.7 284.0  C200.1 284.0 210.5 284.0 220.9 284.0  C231.3 284.0 241.7 284.0 252.2 284.0  C262.6 284.0 273.0 284.0 283.4 284.0  C293.8 284.0 304.2 284.0 314.6 284.0  C325.0 284.0 335.4 284.0 345.8 284.0  C356.3 284.0 366.7 284.0 377.1 284.0  C387.5 284.0 397.9 284.0 408.3 284.0  C418.7 284.0 429.1 284.0 439.5 284.0  C449.9 284.0 460.4 284.0 470.8 284.0  C481.2 284.0 491.6 284.0 502.0 284.0  C512.4 284.0 522.8 284.0 533.2 284.0  C543.6 284.0 554.1 284.0 564.5 284.0  C574.9 284.0 585.3 284.0 595.7 284.0  C606.1 284.0 616.5 284.0 626.9 284.0  C637.3 284.0 647.7 284.0 658.2 284.0  C668.6 284.0 679.0 284.0 689.4 284.0  C699.8 284.0 710.2 284.0 720.6 284.0  C731.0 284.0 741.4 284.0 751.8 284.0  C762.3 284.0 772.7 284.0 783.1 284.0  C793.5 284.0 803.9 284.0 814.3 284.0  C824.7 284.0 835.1 284.0 845.5 284.0  C855.9 284.0 866.4 284.0 876.8 284.0  C887.2 284.0 897.6 284.0 908.0 284.0  C918.4 284.0 928.8 284.0 939.2 284.0  C949.6 284.0 960.1 284.0 970.5 284.0  C980.9 284.0 991.3 284.0 1001.7 284.0  C1012.1 284.0 1022.5 284.0 1032.9 284.0  C1043.3 284.0 1053.7 284.0 1064.2 284.0  C1074.6 284.0 1085.0 284.0 1095.4 284.0  C1105.8 284.0 1116.2 284.0 1126.6 284.0  C1137.0 284.0 1147.4 284.0 1157.8 284.0  C1168.3 284.0 1178.7 284.0 1189.1 284.0  C1199.5 284.0 1209.9 284.0 1220.3 284.0  C1230.7 284.0 1241.1 284.0 1251.5 284.0  C1261.9 284.0 1272.4 284.0 1282.8 284.0  C1293.2 284.0 1303.6 284.0 1314.0 284.0  C1324.4 284.0 1334.8 284.0 1345.2 284.0  C1355.6 284.0 1366.1 284.0 1376.5 284.0  C1386.9 284.0 1397.3 284.0 1407.7 284.0  C1418.1 284.0 1428.5 284.0 1438.9 284.0  C1449.3 284.0 1459.7 284.0 1470.2 284.0  C1480.6 284.0 1491.0 284.0 1501.4 284.0  C1511.8 284.0 1522.2 284.0 1532.6 284.0  C1543.0 284.0 1553.4 284.0 1563.8 284.0  C1574.3 284.0 1584.7 284.0 1595.1 284.0  C1605.5 284.0 1615.9 284.0 1626.3 284.0  C1636.7 284.0 1647.1 284.0 1657.5 284.0  C1667.9 284.0 1678.4 284.0 1688.8 284.0  C1699.2 284.0 1714.8 284.0 1720.0 284.0 L1720.0 284 L96.0 284 Z" fill="url(#area-fill)"/>
+  <path d="M96.0 284.0 C101.2 284.0 116.8 284.0 127.2 284.0  C137.6 284.0 148.1 284.0 158.5 284.0  C168.9 284.0 179.3 284.0 189.7 284.0  C200.1 284.0 210.5 284.0 220.9 284.0  C231.3 284.0 241.7 284.0 252.2 284.0  C262.6 284.0 273.0 284.0 283.4 284.0  C293.8 284.0 304.2 284.0 314.6 284.0  C325.0 284.0 335.4 284.0 345.8 284.0  C356.3 284.0 366.7 284.0 377.1 284.0  C387.5 284.0 397.9 284.0 408.3 284.0  C418.7 284.0 429.1 284.0 439.5 284.0  C449.9 284.0 460.4 284.0 470.8 284.0  C481.2 284.0 491.6 284.0 502.0 284.0  C512.4 284.0 522.8 284.0 533.2 284.0  C543.6 284.0 554.1 284.0 564.5 284.0  C574.9 284.0 585.3 284.0 595.7 284.0  C606.1 284.0 616.5 284.0 626.9 284.0  C637.3 284.0 647.7 284.0 658.2 284.0  C668.6 284.0 679.0 284.0 689.4 284.0  C699.8 284.0 710.2 284.0 720.6 284.0  C731.0 284.0 741.4 284.0 751.8 284.0  C762.3 284.0 772.7 284.0 783.1 284.0  C793.5 284.0 803.9 284.0 814.3 284.0  C824.7 284.0 835.1 284.0 845.5 284.0  C855.9 284.0 866.4 284.0 876.8 284.0  C887.2 284.0 897.6 284.0 908.0 284.0  C918.4 284.0 928.8 284.0 939.2 284.0  C949.6 284.0 960.1 284.0 970.5 284.0  C980.9 284.0 991.3 284.0 1001.7 284.0  C1012.1 284.0 1022.5 284.0 1032.9 284.0  C1043.3 284.0 1053.7 284.0 1064.2 284.0  C1074.6 284.0 1085.0 284.0 1095.4 284.0  C1105.8 284.0 1116.2 284.0 1126.6 284.0  C1137.0 284.0 1147.4 284.0 1157.8 284.0  C1168.3 284.0 1178.7 284.0 1189.1 284.0  C1199.5 284.0 1209.9 284.0 1220.3 284.0  C1230.7 284.0 1241.1 284.0 1251.5 284.0  C1261.9 284.0 1272.4 284.0 1282.8 284.0  C1293.2 284.0 1303.6 284.0 1314.0 284.0  C1324.4 284.0 1334.8 284.0 1345.2 284.0  C1355.6 284.0 1366.1 284.0 1376.5 284.0  C1386.9 284.0 1397.3 284.0 1407.7 284.0  C1418.1 284.0 1428.5 284.0 1438.9 284.0  C1449.3 284.0 1459.7 284.0 1470.2 284.0  C1480.6 284.0 1491.0 284.0 1501.4 284.0  C1511.8 284.0 1522.2 284.0 1532.6 284.0  C1543.0 284.0 1553.4 284.0 1563.8 284.0  C1574.3 284.0 1584.7 284.0 1595.1 284.0  C1605.5 284.0 1615.9 284.0 1626.3 284.0  C1636.7 284.0 1647.1 284.0 1657.5 284.0  C1667.9 284.0 1678.4 284.0 1688.8 284.0  C1699.2 284.0 1714.8 284.0 1720.0 284.0" fill="none" stroke="#e51d2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g><circle cx="96.0" cy="284.0" r="8" fill="transparent"><title>Week of 2025-10-19: 0 contributions</title></circle>
+    <circle cx="127.2" cy="284.0" r="8" fill="transparent"><title>Week of 2025-10-26: 0 contributions</title></circle>
+    <circle cx="158.5" cy="284.0" r="8" fill="transparent"><title>Week of 2025-11-02: 0 contributions</title></circle>
+    <circle cx="189.7" cy="284.0" r="8" fill="transparent"><title>Week of 2025-11-09: 0 contributions</title></circle>
+    <circle cx="220.9" cy="284.0" r="8" fill="transparent"><title>Week of 2025-11-16: 0 contributions</title></circle>
+    <circle cx="252.2" cy="284.0" r="8" fill="transparent"><title>Week of 2025-11-23: 0 contributions</title></circle>
+    <circle cx="283.4" cy="284.0" r="8" fill="transparent"><title>Week of 2025-11-30: 0 contributions</title></circle>
+    <circle cx="314.6" cy="284.0" r="8" fill="transparent"><title>Week of 2025-12-07: 0 contributions</title></circle>
+    <circle cx="345.8" cy="284.0" r="8" fill="transparent"><title>Week of 2025-12-14: 0 contributions</title></circle>
+    <circle cx="377.1" cy="284.0" r="8" fill="transparent"><title>Week of 2025-12-21: 0 contributions</title></circle>
+    <circle cx="408.3" cy="284.0" r="8" fill="transparent"><title>Week of 2025-12-28: 0 contributions</title></circle>
+    <circle cx="439.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-01-04: 0 contributions</title></circle>
+    <circle cx="470.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-01-11: 0 contributions</title></circle>
+    <circle cx="502.0" cy="284.0" r="8" fill="transparent"><title>Week of 2026-01-18: 0 contributions</title></circle>
+    <circle cx="533.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-01-25: 0 contributions</title></circle>
+    <circle cx="564.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-02-01: 0 contributions</title></circle>
+    <circle cx="595.7" cy="284.0" r="8" fill="transparent"><title>Week of 2026-02-08: 0 contributions</title></circle>
+    <circle cx="626.9" cy="284.0" r="8" fill="transparent"><title>Week of 2026-02-15: 0 contributions</title></circle>
+    <circle cx="658.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-02-22: 0 contributions</title></circle>
+    <circle cx="689.4" cy="284.0" r="8" fill="transparent"><title>Week of 2026-03-01: 0 contributions</title></circle>
+    <circle cx="720.6" cy="284.0" r="8" fill="transparent"><title>Week of 2026-03-08: 0 contributions</title></circle>
+    <circle cx="751.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-03-15: 0 contributions</title></circle>
+    <circle cx="783.1" cy="284.0" r="8" fill="transparent"><title>Week of 2026-03-22: 0 contributions</title></circle>
+    <circle cx="814.3" cy="284.0" r="8" fill="transparent"><title>Week of 2026-03-29: 0 contributions</title></circle>
+    <circle cx="845.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-04-05: 0 contributions</title></circle>
+    <circle cx="876.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-04-12: 0 contributions</title></circle>
+    <circle cx="908.0" cy="284.0" r="8" fill="transparent"><title>Week of 2026-04-19: 0 contributions</title></circle>
+    <circle cx="939.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-04-26: 0 contributions</title></circle>
+    <circle cx="970.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-05-03: 0 contributions</title></circle>
+    <circle cx="1001.7" cy="284.0" r="8" fill="transparent"><title>Week of 2026-05-10: 0 contributions</title></circle>
+    <circle cx="1032.9" cy="284.0" r="8" fill="transparent"><title>Week of 2026-05-17: 0 contributions</title></circle>
+    <circle cx="1064.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-05-24: 0 contributions</title></circle>
+    <circle cx="1095.4" cy="284.0" r="8" fill="transparent"><title>Week of 2026-05-31: 0 contributions</title></circle>
+    <circle cx="1126.6" cy="284.0" r="8" fill="transparent"><title>Week of 2026-06-07: 0 contributions</title></circle>
+    <circle cx="1157.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-06-14: 0 contributions</title></circle>
+    <circle cx="1189.1" cy="284.0" r="8" fill="transparent"><title>Week of 2026-06-21: 0 contributions</title></circle>
+    <circle cx="1220.3" cy="284.0" r="8" fill="transparent"><title>Week of 2026-06-28: 0 contributions</title></circle>
+    <circle cx="1251.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-07-05: 0 contributions</title></circle>
+    <circle cx="1282.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-07-12: 0 contributions</title></circle>
+    <circle cx="1314.0" cy="284.0" r="8" fill="transparent"><title>Week of 2026-07-19: 0 contributions</title></circle>
+    <circle cx="1345.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-07-26: 0 contributions</title></circle>
+    <circle cx="1376.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-08-02: 0 contributions</title></circle>
+    <circle cx="1407.7" cy="284.0" r="8" fill="transparent"><title>Week of 2026-08-09: 0 contributions</title></circle>
+    <circle cx="1438.9" cy="284.0" r="8" fill="transparent"><title>Week of 2026-08-16: 0 contributions</title></circle>
+    <circle cx="1470.2" cy="284.0" r="8" fill="transparent"><title>Week of 2026-08-23: 0 contributions</title></circle>
+    <circle cx="1501.4" cy="284.0" r="8" fill="transparent"><title>Week of 2026-08-30: 0 contributions</title></circle>
+    <circle cx="1532.6" cy="284.0" r="8" fill="transparent"><title>Week of 2026-09-06: 0 contributions</title></circle>
+    <circle cx="1563.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-09-13: 0 contributions</title></circle>
+    <circle cx="1595.1" cy="284.0" r="8" fill="transparent"><title>Week of 2026-09-20: 0 contributions</title></circle>
+    <circle cx="1626.3" cy="284.0" r="8" fill="transparent"><title>Week of 2026-09-27: 0 contributions</title></circle>
+    <circle cx="1657.5" cy="284.0" r="8" fill="transparent"><title>Week of 2026-10-04: 0 contributions</title></circle>
+    <circle cx="1688.8" cy="284.0" r="8" fill="transparent"><title>Week of 2026-10-11: 0 contributions</title></circle>
+    <circle cx="1720.0" cy="284.0" r="8" fill="transparent"><title>Week of 2026-10-18: 0 contributions</title></circle></g>
+  <g><circle cx="96.0" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="252.2" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="408.3" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="564.5" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="720.6" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="876.8" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1032.9" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1189.1" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1345.2" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1501.4" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1657.5" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>
+    <circle cx="1720.0" cy="284.0" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/></g>
+  <g><text class="x-label" x="127.23076923076923" y="309">NOV</text><text class="x-label" x="283.38461538461536" y="309">DEC</text><text class="x-label" x="408.3076923076923" y="309">JAN</text><text class="x-label" x="564.4615384615383" y="309">FEB</text><text class="x-label" x="689.3846153846154" y="309">MAR</text><text class="x-label" x="814.3076923076923" y="309">APR</text><text class="x-label" x="939.2307692307693" y="309">MAY</text><text class="x-label" x="1095.3846153846155" y="309">JUN</text><text class="x-label" x="1220.3076923076924" y="309">JUL</text><text class="x-label" x="1345.2307692307693" y="309">AUG</text><text class="x-label" x="1501.3846153846155" y="309">SEP</text><text class="x-label" x="1626.3076923076924" y="309">OCT</text></g>
+  <text class="footer" x="1730" y="323" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;fill:#817b7e;font-size:10px;letter-spacing:1.25px}
+    .eyebrow{fill:#f1ede1;font-size:13px;font-weight:700;letter-spacing:2.3px}
+    .meta{font-size:10px;letter-spacing:1.05px}
+    .y-label,.x-label{font-size:9px;letter-spacing:1px}
+    .footer{font-size:9px;letter-spacing:1.6px}
+  </style>
+</svg>

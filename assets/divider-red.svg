@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="8" viewBox="0 0 1200 8" role="img" aria-label="Thin crimson manga panel divider">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e51d2b" stop-opacity="0"/>
+      <stop offset="0.12" stop-color="#e51d2b" stop-opacity="0.36"/>
+      <stop offset="0.5" stop-color="#ff2638" stop-opacity="0.9"/>
+      <stop offset="0.88" stop-color="#e51d2b" stop-opacity="0.36"/>
+      <stop offset="1" stop-color="#e51d2b" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft-glow" x="-5%" y="-100%" width="110%" height="300%">
+      <feGaussianBlur stdDeviation="1.3"/>
+    </filter>
+  </defs>
+  <path d="M0 4H1200" stroke="#e51d2b" stroke-width="2.4" opacity="0.35" filter="url(#soft-glow)"/>
+  <path d="M0 4H1200" stroke="url(#fade)" stroke-width="1"/>
+</svg>

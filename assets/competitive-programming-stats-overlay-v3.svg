@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-label="Transparent platform logo and competitive programming stats overlay">
+  <title>Competitive programming live-stats overlay</title>
+  <desc>Transparent vector layer aligned to the three empty platform cards. Platform logos and current profile stats are inserted by the updater.</desc>
+  <defs>
+    <style>
+      .brand-name { font-family: Bahnschrift, Arial, sans-serif; font-size: 27px; font-weight: 700; fill: #f1ede1; }
+      .metric-label { font-family: Bahnschrift, Arial, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.6px; fill: #e51d2b; }
+      .metric-value { font-family: Bahnschrift, Arial, sans-serif; font-size: 42px; font-weight: 900; fill: #f1ede1; }
+      .hairline { stroke: #92121b; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <!-- LeetCode card overlay; centered on the first blank card. -->
+  <g id="leetcode-card" transform="translate(194 0)">
+    <image x="-33" y="500" width="66" height="78" href="__LEETCODE_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+    <text class="brand-name" x="0" y="608" text-anchor="middle">LeetCode</text>
+    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+    <text class="metric-value" id="leetcode-solved" x="-60" y="720" text-anchor="middle">—</text>
+    <text class="metric-value" id="leetcode-rating" x="62" y="720" text-anchor="middle">—</text>
+  </g>
+
+  <!-- CodeChef card overlay; centered on the second blank card. -->
+  <g id="codechef-card" transform="translate(535 0)">
+    <image x="-34" y="505" width="68" height="68" href="__CODECHEF_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+    <text class="brand-name" x="0" y="608" text-anchor="middle">CodeChef</text>
+    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+    <text class="metric-value" id="codechef-solved" x="-60" y="720" text-anchor="middle">—</text>
+    <text class="metric-value" id="codechef-rating" x="62" y="720" text-anchor="middle">—</text>
+  </g>
+
+  <!-- Codeforces card overlay; centered on the third blank card. -->
+  <g id="codeforces-card" transform="translate(859 0)">
+    <svg x="-40" y="505" width="80" height="66" viewBox="0 0 200 151" role="img" aria-label="Codeforces logo">
+      <rect x="0" y="41" width="51" height="108" rx="13" fill="#f9cf59"/>
+      <rect x="69" y="0" width="51" height="149" rx="13" fill="#188dcc"/>
+      <rect x="137" y="56" width="51" height="93" rx="13" fill="#b81d25"/>
+    </svg>
+    <text class="brand-name" x="0" y="608" text-anchor="middle">Codeforces</text>
+    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+    <text class="metric-value" id="codeforces-solved" x="-60" y="720" text-anchor="middle">—</text>
+    <text class="metric-value" id="codeforces-rating" x="62" y="720" text-anchor="middle">—</text>
+  </g>
+</svg>
