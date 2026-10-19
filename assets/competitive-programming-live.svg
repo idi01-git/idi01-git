@@ -22,7 +22,7 @@
     <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
     <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
     <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
-    <text class="metric-value" id="leetcode-solved" x="-60" y="720" text-anchor="middle">129</text>
+    <text class="metric-value" id="leetcode-solved" x="-60" y="720" text-anchor="middle">130</text>
     <text class="metric-value" id="leetcode-rating" x="62" y="720" text-anchor="middle">—</text>
   </g>
 
