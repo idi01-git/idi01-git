@@ -1,23 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1774" height="376" viewBox="0 0 1774 376" role="img" aria-label="GitHub contribution heatmap for idi01-git">
   <defs>
-    <linearGradient id="rule-glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.3"/>
-      <stop offset="10%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
-      <stop offset="90%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.3"/>
-    </linearGradient>
-    <linearGradient id="rule-core" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.4"/>
-      <stop offset="15%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#ff7582" stop-opacity="1"/>
-      <stop offset="85%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.4"/>
-    </linearGradient>
-    <filter id="header-glow" x="-5%" y="-300%" width="110%" height="700%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+    <filter id="header-glow" x="-20%" y="-400%" width="140%" height="900%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur2"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
@@ -25,10 +13,11 @@
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">CONTRIBUTION CALENDAR</text>
   <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">250</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">UPDATED 2026-10-19</tspan></text>
-  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
-  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
-  <path d="M40 70H1734" stroke="url(#rule-core)" stroke-width="1.8"/>
-  <path d="M140 70H1634" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.35" filter="url(#header-glow)"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff2238" stroke-width="6" stroke-opacity="0.75" filter="url(#header-glow)"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff5967" stroke-width="1.6"/>
+  <line x1="140" y1="70" x2="1634" y2="70" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
   <g class="months"><text class="month" x="130" y="104">NOV</text><text class="month" x="285" y="104">DEC</text><text class="month" x="409" y="104">JAN</text><text class="month" x="564" y="104">FEB</text><text class="month" x="688" y="104">MAR</text><text class="month" x="812" y="104">APR</text><text class="month" x="936" y="104">MAY</text><text class="month" x="1091" y="104">JUN</text><text class="month" x="1215" y="104">JUL</text><text class="month" x="1339" y="104">AUG</text><text class="month" x="1494" y="104">SEP</text><text class="month" x="1618" y="104">OCT</text></g>
   <g class="weekdays">
     <text class="weekday" x="83" y="167" text-anchor="end">MON</text>

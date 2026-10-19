@@ -190,24 +190,12 @@ function makeHeatmap(calendar) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="GitHub contribution heatmap for ${username}">
   <defs>
-    <linearGradient id="rule-glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.3"/>
-      <stop offset="10%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
-      <stop offset="90%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.3"/>
-    </linearGradient>
-    <linearGradient id="rule-core" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.4"/>
-      <stop offset="15%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#ff7582" stop-opacity="1"/>
-      <stop offset="85%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.4"/>
-    </linearGradient>
-    <filter id="header-glow" x="-5%" y="-300%" width="110%" height="700%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+    <filter id="header-glow" x="-20%" y="-400%" width="140%" height="900%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur2"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
@@ -215,10 +203,11 @@ function makeHeatmap(calendar) {
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="${contentLeft}" y="52">CONTRIBUTION CALENDAR</text>
   <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
-  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
-  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
-  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-core)" stroke-width="1.8"/>
-  <path d="M${contentLeft + 100} 70H${contentRight - 100}" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
+  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.35" filter="url(#header-glow)"/>
+  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff2238" stroke-width="6" stroke-opacity="0.75" filter="url(#header-glow)"/>
+  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
+  <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#ff5967" stroke-width="1.6"/>
+  <line x1="${contentLeft + 100}" y1="70" x2="${contentRight - 100}" y2="70" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
   <g class="months">${monthLabels.join('')}</g>
   <g class="weekdays">
     <text class="weekday" x="${weekdayAnchorX}" y="167" text-anchor="end">MON</text>
@@ -320,24 +309,12 @@ function makeActivityGraph(calendar) {
       <stop offset="0.6" stop-color="#e51d2b" stop-opacity=".12"/>
       <stop offset="1" stop-color="#e51d2b" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="rule-glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.3"/>
-      <stop offset="10%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
-      <stop offset="90%" stop-color="#ff2238" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.3"/>
-    </linearGradient>
-    <linearGradient id="rule-core" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.4"/>
-      <stop offset="15%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#ff7582" stop-opacity="1"/>
-      <stop offset="85%" stop-color="#ff2238" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.4"/>
-    </linearGradient>
-    <filter id="header-glow" x="-5%" y="-300%" width="110%" height="700%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+    <filter id="header-glow" x="-20%" y="-400%" width="140%" height="900%">
+      <feGaussianBlur stdDeviation="3.5" result="blur1"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur2"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
@@ -345,10 +322,11 @@ function makeActivityGraph(calendar) {
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">ACTIVITY TRACE · LAST 12 MONTHS</text>
   <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">PEAK ${peak}/WK</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
-  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
-  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
-  <path d="M40 70H1734" stroke="url(#rule-core)" stroke-width="1.8"/>
-  <path d="M140 70H1634" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="12" stroke-opacity="0.35" filter="url(#header-glow)"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff2238" stroke-width="6" stroke-opacity="0.75" filter="url(#header-glow)"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff1e38" stroke-width="3" stroke-opacity="1"/>
+  <line x1="40" y1="70" x2="1734" y2="70" stroke="#ff5967" stroke-width="1.6"/>
+  <line x1="140" y1="70" x2="1634" y2="70" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85"/>
   <g>${grid}</g>
   <path d="${area}" fill="url(#area-fill)"/>
   <path d="${line}" fill="none" stroke="#f12638" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -376,7 +354,7 @@ if (!previewMode && !emptyMode && !calendar.isCached) {
   const cacheVersion = (process.env.GITHUB_RUN_ID || new Date().toISOString()).replace(/[^0-9A-Za-z]/g, '');
   const readme = await readFile(readmePath, 'utf8');
   const cacheBustedReadme = readme.replace(
-    /(\.\/assets\/github-(?:contribution-heatmap|activity-graph)\.svg)(?:\?v=[^"&\s]*)?/g,
+    /(\.\/assets\/(?:github-(?:contribution-heatmap|activity-graph)|divider-red)\.svg)(?:\?v=[^"&\s]*)?/g,
     `$1?v=${cacheVersion}`,
   );
   if (cacheBustedReadme !== readme) await writeFile(readmePath, cacheBustedReadme, 'utf8');
