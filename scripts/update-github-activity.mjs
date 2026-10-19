@@ -101,28 +101,31 @@ async function fetchCalendar() {
 
 function makeHeatmap(calendar) {
   const width = 1774;
-  const height = 360;
-  const cell = 22;
+  const height = 850;
+  const cell = 36;
   const gap = 8;
   const pitch = cell + gap;
   const columns = Math.ceil(calendar.days.length / 7);
-  const gridWidth = columns * pitch - gap;
+  const columnsPerRow = Math.ceil(columns / 2);
+  const gridWidth = columnsPerRow * pitch - gap;
   const left = Math.round((width - gridWidth) / 2);
-  const top = 104;
+  const top = 112;
+  const secondTop = top + (7 * pitch) + 74;
   const max = Math.max(1, ...calendar.days.map((day) => day.contributionCount));
   const colors = ['#211c1e', '#50121a', '#861722', '#c51e2c', '#ff3345'];
+  const first = new Date(`${calendar.days[0].date}T00:00:00Z`);
+  first.setUTCDate(first.getUTCDate() - first.getUTCDay());
   const cells = calendar.days.map((day) => {
     const date = new Date(`${day.date}T00:00:00Z`);
     const sunday = new Date(date);
     sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
-    const first = new Date(`${calendar.days[0].date}T00:00:00Z`);
-    first.setUTCDate(first.getUTCDate() - first.getUTCDay());
     const week = Math.floor((sunday - first) / (7 * 86_400_000));
-    const x = left + week * pitch;
-    const y = top + day.weekday * pitch;
+    const row = Math.floor(week / columnsPerRow);
+    const x = left + (week % columnsPerRow) * pitch;
+    const y = (row === 0 ? top : secondTop) + day.weekday * pitch;
     const unit = day.contributionCount === 1 ? 'contribution' : 'contributions';
     const label = `${day.contributionCount} ${unit} on ${day.date}`;
-    return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="3" fill="${colors[levelFor(day.contributionCount, max)]}"><title>${escapeXml(label)}</title></rect>`;
+    return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="5" fill="${colors[levelFor(day.contributionCount, max)]}"><title>${escapeXml(label)}</title></rect>`;
   }).join('\n    ');
 
   const monthLabels = [];
@@ -131,35 +134,41 @@ function makeHeatmap(calendar) {
     const date = new Date(`${day.date}T00:00:00Z`);
     const month = date.toLocaleString('en', { month: 'short', timeZone: 'UTC' });
     if (date.getUTCDate() <= 7 && month !== lastMonth) {
-      const week = Math.floor((date - new Date(`${calendar.days[0].date}T00:00:00Z`)) / (7 * 86_400_000));
-      monthLabels.push(`<text x="${left + week * pitch}" y="84">${month.toUpperCase()}</text>`);
+      const sunday = new Date(date);
+      sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
+      const week = Math.floor((sunday - first) / (7 * 86_400_000));
+      const row = Math.floor(week / columnsPerRow);
+      const x = left + (week % columnsPerRow) * pitch;
+      const y = row === 0 ? 88 : secondTop - 24;
+      monthLabels.push(`<text class="month" x="${x}" y="${y}">${month.toUpperCase()}</text>`);
       lastMonth = month;
     }
   });
-  const weekdays = [
+  const weekdays = [top, secondTop].flatMap((gridTop) => [
     ['MON', 1], ['WED', 3], ['FRI', 5],
-  ].map(([label, day]) => `<text class="weekday" x="${left - 14}" y="${top + day * pitch + 15}" text-anchor="end">${label}</text>`).join('\n    ');
+  ].map(([label, day]) => `<text class="weekday" x="${left - 18}" y="${gridTop + day * pitch + 18}" text-anchor="end">${label}</text>`)).join('\n    ');
   const total = Number(calendar.totalContributions ?? calendar.days.reduce((sum, day) => sum + day.contributionCount, 0));
   const updateStamp = previewMode ? 'PREVIEW DATA' : emptyMode ? 'FIRST LIVE REFRESH PENDING' : `UPDATED ${new Date().toISOString().slice(0, 10)}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="GitHub contribution heatmap for ${username}">
   <defs><linearGradient id="rule" x1="0" x2="1"><stop stop-color="#e51d2b" stop-opacity="0"/><stop offset=".5" stop-color="#e51d2b" stop-opacity=".85"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient></defs>
   <rect width="100%" height="100%" rx="14" fill="#080708"/>
-  <text class="eyebrow" x="44" y="42">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="${width - 44}" y="42" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · ${updateStamp}</text>
-  <path d="M44 54H${width - 44}" stroke="url(#rule)" stroke-width="1"/>
+  <text class="eyebrow" x="44" y="54">CONTRIBUTION CALENDAR · LAST 12 MONTHS</text>
+  <text class="meta" x="${width - 44}" y="54" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · ${updateStamp}</text>
+  <path d="M44 72H${width - 44}" stroke="url(#rule)" stroke-width="1.5"/>
   <g class="months">${monthLabels.join('')}</g>
   <g>${weekdays}</g>
   <g>${cells}</g>
-  <g class="legend" transform="translate(${width - 250},${height - 18})">
-    <text x="0" y="0">LESS</text><rect x="50" y="-14" width="16" height="16" rx="3" fill="${colors[0]}"/><rect x="73" y="-14" width="16" height="16" rx="3" fill="${colors[1]}"/><rect x="96" y="-14" width="16" height="16" rx="3" fill="${colors[2]}"/><rect x="119" y="-14" width="16" height="16" rx="3" fill="${colors[3]}"/><rect x="142" y="-14" width="16" height="16" rx="3" fill="${colors[4]}"/><text x="170" y="0">MORE</text>
+  <path d="M${left} ${secondTop - 53}H${left + gridWidth}" stroke="#e51d2b" stroke-opacity=".5" stroke-width="1"/>
+  <g class="legend" transform="translate(${width - 330},${height - 31})">
+    <text x="0" y="0">LESS</text><rect x="62" y="-20" width="22" height="22" rx="4" fill="${colors[0]}"/><rect x="93" y="-20" width="22" height="22" rx="4" fill="${colors[1]}"/><rect x="124" y="-20" width="22" height="22" rx="4" fill="${colors[2]}"/><rect x="155" y="-20" width="22" height="22" rx="4" fill="${colors[3]}"/><rect x="186" y="-20" width="22" height="22" rx="4" fill="${colors[4]}"/><text x="222" y="0">MORE</text>
   </g>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:17px;letter-spacing:1px}
-    .eyebrow{fill:#f1ede1;font-size:22px;font-weight:700;letter-spacing:1.8px}
-    .meta{fill:#b7aeb1;font-size:15px;letter-spacing:.8px}
-    .months{font-weight:700}
-    .weekday{font-size:14px;letter-spacing:.5px}
+    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:18px;letter-spacing:.9px}
+    .eyebrow{fill:#f1ede1;font-size:25px;font-weight:700;letter-spacing:1.5px}
+    .meta{fill:#b7aeb1;font-size:16px;letter-spacing:.6px}
+    .month{fill:#d4c8cc;font-size:17px;font-weight:700;letter-spacing:1px}
+    .weekday{font-size:15px;letter-spacing:.5px}
   </style>
 </svg>`;
 }
@@ -180,8 +189,8 @@ function smoothPath(points) {
 
 function makeActivityGraph(calendar) {
   const width = 1774;
-  const height = 410;
-  const plot = { x: 112, y: 100, width: width - 170, height: 245 };
+  const height = 540;
+  const plot = { x: 122, y: 128, width: width - 190, height: 320 };
   const weekly = new Map();
   calendar.days.forEach((day) => {
     const date = new Date(`${day.date}T00:00:00Z`);
@@ -214,7 +223,7 @@ function makeActivityGraph(calendar) {
       sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
       const weekIndex = weekStarts.indexOf(sunday.getTime());
       const x = plot.x + (weekIndex / Math.max(1, counts.length - 1)) * plot.width;
-      monthLabels.push(`<text class="x-label" x="${x}" y="${plot.y + plot.height + 25}">${month.toUpperCase()}</text>`);
+      monthLabels.push(`<text class="x-label" x="${x}" y="${plot.y + plot.height + 34}">${month.toUpperCase()}</text>`);
       lastMonth = month;
     }
   });
@@ -224,10 +233,10 @@ function makeActivityGraph(calendar) {
   const hoverTargets = points.map((point) => {
     const weekOf = new Date(point.weekStart).toISOString().slice(0, 10);
     const unit = point.count === 1 ? 'contribution' : 'contributions';
-    return `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="10" fill="transparent"><title>Week of ${weekOf}: ${point.count} ${unit}</title></circle>`;
+    return `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="12" fill="transparent"><title>Week of ${weekOf}: ${point.count} ${unit}</title></circle>`;
   }).join('\n    ');
   const pointsMarkup = points.filter((point, index) => index % 5 === 0 || index === points.length - 1)
-    .map((point) => `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4.6" fill="#f1ede1" stroke="#e51d2b" stroke-width="2.5"/>`).join('\n    ');
+    .map((point) => `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="5.5" fill="#f1ede1" stroke="#e51d2b" stroke-width="3"/>`).join('\n    ');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Weekly GitHub activity graph for ${username}">
   <defs>
@@ -235,22 +244,22 @@ function makeActivityGraph(calendar) {
     <linearGradient id="rule" x1="0" x2="1"><stop stop-color="#e51d2b" stop-opacity="0"/><stop offset=".5" stop-color="#e51d2b" stop-opacity=".85"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient>
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708"/>
-  <text class="eyebrow" x="44" y="42">ACTIVITY TRACE</text>
-  <text class="meta" x="${width - 44}" y="42" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · PEAK WEEK ${peak} · ${updateStamp}</text>
-  <path d="M44 54H${width - 44}" stroke="url(#rule)" stroke-width="1"/>
+  <text class="eyebrow" x="44" y="54">ACTIVITY TRACE · LAST 12 MONTHS</text>
+  <text class="meta" x="${width - 44}" y="54" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · PEAK WEEK ${peak} · ${updateStamp}</text>
+  <path d="M44 72H${width - 44}" stroke="url(#rule)" stroke-width="1.5"/>
   <g>${grid}</g>
   <path d="${area}" fill="url(#area-fill)"/>
-  <path d="${line}" fill="none" stroke="#f12638" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="${line}" fill="none" stroke="#f12638" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <g>${hoverTargets}</g>
   <g>${pointsMarkup}</g>
   <g>${monthLabels.join('')}</g>
-  <text class="footer" x="${width - 44}" y="${height - 18}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
+  <text class="footer" x="${width - 44}" y="${height - 26}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:17px;letter-spacing:.9px}
-    .eyebrow{fill:#f1ede1;font-size:22px;font-weight:700;letter-spacing:1.8px}
-    .meta{fill:#b7aeb1;font-size:15px;letter-spacing:.7px}
-    .y-label,.x-label{font-size:15px;letter-spacing:.6px}
-    .footer{font-size:15px;letter-spacing:1px}
+    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:18px;letter-spacing:.8px}
+    .eyebrow{fill:#f1ede1;font-size:25px;font-weight:700;letter-spacing:1.5px}
+    .meta{fill:#b7aeb1;font-size:16px;letter-spacing:.6px}
+    .y-label,.x-label{font-size:17px;letter-spacing:.5px}
+    .footer{font-size:16px;letter-spacing:.9px}
   </style>
 </svg>`;
 }
