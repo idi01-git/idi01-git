@@ -18,12 +18,24 @@ function escapeXml(value) {
   })[character]);
 }
 
-function levelFor(count, max) {
-  if (!count) return 0;
-  const ratio = count / Math.max(1, max);
-  if (ratio < 0.2) return 1;
-  if (ratio < 0.42) return 2;
-  if (ratio < 0.68) return 3;
+function computeThresholds(days) {
+  const active = days.map((d) => d.contributionCount).filter((c) => c > 0).sort((a, b) => a - b);
+  if (active.length === 0) return [1, 2, 3, 4];
+  const q1 = active[Math.floor(active.length * 0.25)];
+  const q2 = active[Math.floor(active.length * 0.50)];
+  const q3 = active[Math.floor(active.length * 0.75)];
+  const t1 = Math.max(1, q1);
+  const t2 = Math.max(t1 + 1, q2);
+  const t3 = Math.max(t2 + 1, q3);
+  const t4 = Math.max(t3 + 1, active[Math.floor(active.length * 0.92)]);
+  return [t1, t2, t3, t4];
+}
+
+function getLevel(count, thresholds) {
+  if (!count || count <= 0) return 0;
+  if (count < thresholds[1]) return 1;
+  if (count < thresholds[2]) return 2;
+  if (count < thresholds[3]) return 3;
   return 4;
 }
 
@@ -62,7 +74,20 @@ function createEmptyCalendar() {
 
 async function fetchCalendar() {
   const token = process.env.GITHUB_TOKEN;
-  if (!token) throw new Error('GITHUB_TOKEN is required to fetch the public contribution calendar.');
+  if (!token) {
+    try {
+      const cached = JSON.parse(await readFile(dataPath, 'utf8'));
+      if (cached?.days?.length) {
+        console.log(`Using cached contribution data from ${dataPath} (${cached.days.length} days).`);
+        return {
+          totalContributions: cached.totalContributions,
+          days: cached.days,
+          isCached: true,
+        };
+      }
+    } catch {}
+    throw new Error('GITHUB_TOKEN is required to fetch the public contribution calendar.');
+  }
 
   const to = new Date();
   const from = new Date(to.getTime() - 365 * 24 * 60 * 60 * 1000);
@@ -101,31 +126,44 @@ async function fetchCalendar() {
 
 function makeHeatmap(calendar) {
   const width = 1774;
-  const height = 850;
-  const cell = 36;
-  const gap = 8;
-  const pitch = cell + gap;
-  const columns = Math.ceil(calendar.days.length / 7);
-  const columnsPerRow = Math.ceil(columns / 2);
-  const gridWidth = columnsPerRow * pitch - gap;
-  const left = Math.round((width - gridWidth) / 2);
-  const top = 112;
-  const secondTop = top + (7 * pitch) + 74;
-  const max = Math.max(1, ...calendar.days.map((day) => day.contributionCount));
-  const colors = ['#211c1e', '#50121a', '#861722', '#c51e2c', '#ff3345'];
+  const height = 376;
+  const pitch = 31;
+  const cell = 23;
+  const gap = pitch - cell; // 8
+  const top = 120;
+  const rx = 4.5;
+  const colors = ['#171316', '#4c1018', '#871522', '#cb1b2a', '#ff3648'];
+  const thresholds = computeThresholds(calendar.days);
+
   const first = new Date(`${calendar.days[0].date}T00:00:00Z`);
   first.setUTCDate(first.getUTCDate() - first.getUTCDay());
+
+  const last = new Date(`${calendar.days[calendar.days.length - 1].date}T00:00:00Z`);
+  const lastSunday = new Date(last);
+  lastSunday.setUTCDate(lastSunday.getUTCDate() - lastSunday.getUTCDay());
+  const columns = Math.max(52, Math.floor((lastSunday - first) / (7 * 86_400_000)) + 1);
+
+  const gridWidth = columns * pitch - gap;
+  const labelWidth = 43;
+  const labelGap = 16;
+  const totalContentWidth = labelWidth + labelGap + gridWidth;
+  const margin = Math.floor((width - totalContentWidth) / 2);
+  const contentLeft = margin;
+  const contentRight = width - margin;
+  const gridLeft = contentRight - gridWidth;
+  const weekdayAnchorX = gridLeft - labelGap;
+
   const cells = calendar.days.map((day) => {
     const date = new Date(`${day.date}T00:00:00Z`);
     const sunday = new Date(date);
     sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
     const week = Math.floor((sunday - first) / (7 * 86_400_000));
-    const row = Math.floor(week / columnsPerRow);
-    const x = left + (week % columnsPerRow) * pitch;
-    const y = (row === 0 ? top : secondTop) + day.weekday * pitch;
+    const x = gridLeft + week * pitch;
+    const y = top + day.weekday * pitch;
+    const level = getLevel(day.contributionCount, thresholds);
     const unit = day.contributionCount === 1 ? 'contribution' : 'contributions';
     const label = `${day.contributionCount} ${unit} on ${day.date}`;
-    return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="5" fill="${colors[levelFor(day.contributionCount, max)]}"><title>${escapeXml(label)}</title></rect>`;
+    return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="${rx}" fill="${colors[level]}"><title>${escapeXml(label)}</title></rect>`;
   }).join('\n    ');
 
   const monthLabels = [];
@@ -137,38 +175,67 @@ function makeHeatmap(calendar) {
       const sunday = new Date(date);
       sunday.setUTCDate(sunday.getUTCDate() - sunday.getUTCDay());
       const week = Math.floor((sunday - first) / (7 * 86_400_000));
-      const row = Math.floor(week / columnsPerRow);
-      const x = left + (week % columnsPerRow) * pitch;
-      const y = row === 0 ? 88 : secondTop - 24;
-      monthLabels.push(`<text class="month" x="${x}" y="${y}">${month.toUpperCase()}</text>`);
-      lastMonth = month;
+      if (week >= 0 && week < columns) {
+        const x = gridLeft + week * pitch;
+        monthLabels.push(`<text class="month" x="${x}" y="104">${month.toUpperCase()}</text>`);
+        lastMonth = month;
+      }
     }
   });
-  const weekdays = [top, secondTop].flatMap((gridTop) => [
-    ['MON', 1], ['WED', 3], ['FRI', 5],
-  ].map(([label, day]) => `<text class="weekday" x="${left - 18}" y="${gridTop + day * pitch + 18}" text-anchor="end">${label}</text>`)).join('\n    ');
+
   const total = Number(calendar.totalContributions ?? calendar.days.reduce((sum, day) => sum + day.contributionCount, 0));
   const updateStamp = previewMode ? 'PREVIEW DATA' : emptyMode ? 'FIRST LIVE REFRESH PENDING' : `UPDATED ${new Date().toISOString().slice(0, 10)}`;
+  const legendWidth = 191;
+  const legendLeft = contentRight - legendWidth;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="GitHub contribution heatmap for ${username}">
-  <defs><linearGradient id="rule" x1="0" x2="1"><stop stop-color="#e51d2b" stop-opacity="0"/><stop offset=".5" stop-color="#e51d2b" stop-opacity=".85"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient></defs>
-  <rect width="100%" height="100%" rx="14" fill="#080708"/>
-  <text class="eyebrow" x="44" y="54">CONTRIBUTION CALENDAR · LAST 12 MONTHS</text>
-  <text class="meta" x="${width - 44}" y="54" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · ${updateStamp}</text>
-  <path d="M44 72H${width - 44}" stroke="url(#rule)" stroke-width="1.5"/>
+  <defs>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.1"/>
+      <stop offset="12%" stop-color="#e51d2b" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="88%" stop-color="#e51d2b" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="soft-glow" x="-5%" y="-100%" width="110%" height="300%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
+  <text class="eyebrow" x="${contentLeft}" y="52">CONTRIBUTION CALENDAR</text>
+  <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan><tspan class="meta-unit"> contributions</tspan><tspan class="meta-bullet"> · </tspan><tspan class="meta-badge">${updateStamp}</tspan></text>
+  <path d="M${contentLeft} 70H${contentRight}" stroke="#e51d2b" stroke-width="2.2" opacity="0.45" filter="url(#soft-glow)"/>
+  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule)" stroke-width="1.2"/>
   <g class="months">${monthLabels.join('')}</g>
-  <g>${weekdays}</g>
-  <g>${cells}</g>
-  <path d="M${left} ${secondTop - 53}H${left + gridWidth}" stroke="#e51d2b" stroke-opacity=".5" stroke-width="1"/>
-  <g class="legend" transform="translate(${width - 330},${height - 31})">
-    <text x="0" y="0">LESS</text><rect x="62" y="-20" width="22" height="22" rx="4" fill="${colors[0]}"/><rect x="93" y="-20" width="22" height="22" rx="4" fill="${colors[1]}"/><rect x="124" y="-20" width="22" height="22" rx="4" fill="${colors[2]}"/><rect x="155" y="-20" width="22" height="22" rx="4" fill="${colors[3]}"/><rect x="186" y="-20" width="22" height="22" rx="4" fill="${colors[4]}"/><text x="222" y="0">MORE</text>
+  <g class="weekdays">
+    <text class="weekday" x="${weekdayAnchorX}" y="167" text-anchor="end">MON</text>
+    <text class="weekday" x="${weekdayAnchorX}" y="229" text-anchor="end">WED</text>
+    <text class="weekday" x="${weekdayAnchorX}" y="291" text-anchor="end">FRI</text>
+  </g>
+  <g class="cells">${cells}</g>
+  <g class="legend" transform="translate(${legendLeft}, 356)">
+    <text class="legend-text" x="0" y="0">LESS</text>
+    <rect x="42" y="-12" width="15" height="15" rx="3.5" fill="${colors[0]}"/>
+    <rect x="63" y="-12" width="15" height="15" rx="3.5" fill="${colors[1]}"/>
+    <rect x="84" y="-12" width="15" height="15" rx="3.5" fill="${colors[2]}"/>
+    <rect x="105" y="-12" width="15" height="15" rx="3.5" fill="${colors[3]}"/>
+    <rect x="126" y="-12" width="15" height="15" rx="3.5" fill="${colors[4]}"/>
+    <text class="legend-text" x="151" y="0">MORE</text>
   </g>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:18px;letter-spacing:.9px}
-    .eyebrow{fill:#f1ede1;font-size:25px;font-weight:700;letter-spacing:1.5px}
-    .meta{fill:#b7aeb1;font-size:16px;letter-spacing:.6px}
-    .month{fill:#d4c8cc;font-size:17px;font-weight:700;letter-spacing:1px}
-    .weekday{font-size:15px;letter-spacing:.5px}
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Noto Sans", Helvetica, Arial, sans-serif; }
+    .eyebrow { fill: #f1ede1; font-size: 21px; font-weight: 700; letter-spacing: 1.8px; }
+    .meta-count { fill: #f1ede1; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+    .meta-unit { fill: #aaa1a4; font-size: 15px; font-weight: 500; letter-spacing: 0.5px; }
+    .meta-bullet { fill: #541920; font-size: 16px; font-weight: 700; }
+    .meta-badge { fill: #e51d2b; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
+    .month { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
+    .weekday { fill: #7d7377; font-size: 13px; font-weight: 600; letter-spacing: 0.7px; }
+    .legend-text { fill: #7d7377; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; }
   </style>
 </svg>`;
 }
@@ -268,7 +335,7 @@ const calendar = previewMode ? createMockCalendar() : emptyMode ? createEmptyCal
 await mkdir(outputDir, { recursive: true });
 await writeFile(path.join(outputDir, 'github-contribution-heatmap.svg'), makeHeatmap(calendar), 'utf8');
 await writeFile(path.join(outputDir, 'github-activity-graph.svg'), makeActivityGraph(calendar), 'utf8');
-if (!previewMode && !emptyMode) {
+if (!previewMode && !emptyMode && !calendar.isCached) {
   const cacheVersion = (process.env.GITHUB_RUN_ID || new Date().toISOString()).replace(/[^0-9A-Za-z]/g, '');
   const readme = await readFile(readmePath, 'utf8');
   const cacheBustedReadme = readme.replace(
