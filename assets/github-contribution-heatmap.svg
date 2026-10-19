@@ -37,7 +37,7 @@
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">252</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">UPDATED 2026-10-19</tspan></text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">252</tspan><tspan class="meta-unit" dx="8">CONTRIBUTIONS</tspan><tspan class="meta-sep" dx="16">·</tspan><tspan class="meta-badge-label" dx="16">UPDATED</tspan><tspan class="meta-badge-date" dx="6">2026-10-19</tspan></text>
   <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
   <path d="M40 70 Q887 62 1734 70 Q887 78 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
   <path d="M40 70 Q887 66.5 1734 70 Q887 73.5 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
@@ -425,11 +425,13 @@
     <text class="legend-text" x="151" y="0">MORE</text>
   </g>
   <style>
-    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; }
-    .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
-    .meta-count { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
-    .meta-unit { fill: #9e9598; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
-    .meta-badge { fill: #ff2238; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .eyebrow { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
+    .meta-count { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+    .meta-unit { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1.6px; }
+    .meta-sep { fill: #5a4e53; font-size: 18px; font-weight: 600; }
+    .meta-badge-label { fill: #8d8085; font-size: 13px; font-weight: 700; letter-spacing: 1.4px; }
+    .meta-badge-date { fill: #ff2238; font-size: 14px; font-weight: 800; letter-spacing: 1.2px; }
     .month { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
     .weekday { fill: #7d7377; font-size: 13px; font-weight: 600; letter-spacing: 0.7px; }
     .legend-text { fill: #7d7377; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; }

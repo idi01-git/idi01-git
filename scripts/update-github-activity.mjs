@@ -184,7 +184,8 @@ function makeHeatmap(calendar) {
   });
 
   const total = Number(calendar.totalContributions ?? calendar.days.reduce((sum, day) => sum + day.contributionCount, 0));
-  const updateStamp = previewMode ? 'PREVIEW DATA' : emptyMode ? 'FIRST LIVE REFRESH PENDING' : `UPDATED ${new Date().toISOString().slice(0, 10)}`;
+  const updateDate = (!previewMode && !emptyMode) ? new Date().toISOString().slice(0, 10) : '';
+  const updateLabel = previewMode ? 'PREVIEW DATA' : emptyMode ? 'FIRST LIVE REFRESH PENDING' : 'UPDATED';
   const legendWidth = 191;
   const legendLeft = contentRight - legendWidth;
 
@@ -227,7 +228,7 @@ function makeHeatmap(calendar) {
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="${contentLeft}" y="52">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
+  <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan><tspan class="meta-unit" dx="8">CONTRIBUTIONS</tspan><tspan class="meta-sep" dx="16">·</tspan><tspan class="meta-badge-label" dx="16">${updateLabel}</tspan>${updateDate ? `<tspan class="meta-badge-date" dx="6">${updateDate}</tspan>` : ''}</text>
   <line x1="${contentLeft}" y1="70" x2="${contentRight}" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
   <path d="M${contentLeft} 70 Q${(contentLeft + contentRight) / 2} 62 ${contentRight} 70 Q${(contentLeft + contentRight) / 2} 78 ${contentLeft} 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
   <path d="M${contentLeft} 70 Q${(contentLeft + contentRight) / 2} 66.5 ${contentRight} 70 Q${(contentLeft + contentRight) / 2} 73.5 ${contentLeft} 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
@@ -250,11 +251,13 @@ function makeHeatmap(calendar) {
     <text class="legend-text" x="151" y="0">MORE</text>
   </g>
   <style>
-    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; }
-    .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
-    .meta-count { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
-    .meta-unit { fill: #9e9598; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
-    .meta-badge { fill: #ff2238; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .eyebrow { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
+    .meta-count { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+    .meta-unit { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1.6px; }
+    .meta-sep { fill: #5a4e53; font-size: 18px; font-weight: 600; }
+    .meta-badge-label { fill: #8d8085; font-size: 13px; font-weight: 700; letter-spacing: 1.4px; }
+    .meta-badge-date { fill: #ff2238; font-size: 14px; font-weight: 800; letter-spacing: 1.2px; }
     .month { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
     .weekday { fill: #7d7377; font-size: 13px; font-weight: 600; letter-spacing: 0.7px; }
     .legend-text { fill: #7d7377; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; }
@@ -385,8 +388,8 @@ function makeActivityGraph(calendar) {
   <g>${monthLabels.join('')}</g>
   <text class="footer" x="1734" y="${height - 26}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
   <style>
-    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; fill: #aaa1a4; font-size: 18px; letter-spacing: .8px; }
-    .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: #aaa1a4; font-size: 18px; letter-spacing: .8px; }
+    .eyebrow { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 2px; word-spacing: 8px; }
     .meta-peak-label { fill: #f1ede1; font-size: 22px; font-weight: 800; letter-spacing: 1.5px; }
     .meta-peak-val { fill: #ff2238; font-size: 22px; font-weight: 800; letter-spacing: 1.2px; }
     .y-label, .x-label { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 0.8px; }
