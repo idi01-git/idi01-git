@@ -1,29 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="24" viewBox="0 0 1774 24" role="img" aria-label="Berserk themed crimson glowing manga panel divider">
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="32" viewBox="0 0 1774 32" role="img" aria-label="Berserk themed crimson glowing full-width divider">
   <defs>
-    <!-- Core gradient: blazing white-crimson center fading to blood red and transparent ends -->
-    <linearGradient id="beam-core" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0"/>
-      <stop offset="15%" stop-color="#e51d2b" stop-opacity="0.3"/>
-      <stop offset="35%" stop-color="#ff2238" stop-opacity="0.85"/>
-      <stop offset="47%" stop-color="#ff5967" stop-opacity="1"/>
+    <!-- Full-width glowing gradient with intense crimson from edge to edge -->
+    <linearGradient id="full-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff1e38" stop-opacity="0.95"/>
+      <stop offset="8%" stop-color="#e51d2b" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#ff2638" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff3b4e" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#ff2638" stop-opacity="1"/>
+      <stop offset="92%" stop-color="#e51d2b" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ff1e38" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <!-- Core beam: fiery crimson with brilliant white-hot center -->
+    <linearGradient id="full-core" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="12%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="42%" stop-color="#ff7380" stop-opacity="1"/>
       <stop offset="50%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="53%" stop-color="#ff5967" stop-opacity="1"/>
-      <stop offset="65%" stop-color="#ff2238" stop-opacity="0.85"/>
-      <stop offset="85%" stop-color="#e51d2b" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0"/>
+      <stop offset="58%" stop-color="#ff7380" stop-opacity="1"/>
+      <stop offset="88%" stop-color="#ff5967" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ff3345" stop-opacity="1"/>
     </linearGradient>
 
-    <!-- Deep ambient crimson glow gradient -->
-    <linearGradient id="beam-glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0"/>
-      <stop offset="20%" stop-color="#e51d2b" stop-opacity="0.5"/>
-      <stop offset="50%" stop-color="#ff1e38" stop-opacity="0.95"/>
-      <stop offset="80%" stop-color="#e51d2b" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0"/>
+    <!-- Side brackets gradients -->
+    <linearGradient id="bracket-grad-left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff2638" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="bracket-grad-right" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff2638" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.85"/>
     </linearGradient>
 
-    <!-- Soft outer glow filter -->
-    <filter id="crimson-glow" x="-10%" y="-150%" width="120%" height="400%">
+    <!-- High-intensity crimson blur filter -->
+    <filter id="crimson-glow-strong" x="-10%" y="-200%" width="120%" height="500%">
       <feGaussianBlur stdDeviation="3.5" result="blur1"/>
       <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur2"/>
       <feMerge>
@@ -33,41 +45,67 @@
       </feMerge>
     </filter>
 
-    <radialGradient id="center-burst" cx="50%" cy="50%" r="50%">
+    <radialGradient id="center-flare" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="25%" stop-color="#ff3345" stop-opacity="0.9"/>
-      <stop offset="65%" stop-color="#e51d2b" stop-opacity="0.4"/>
+      <stop offset="25%" stop-color="#ff3345" stop-opacity="0.95"/>
+      <stop offset="65%" stop-color="#e51d2b" stop-opacity="0.6"/>
       <stop offset="100%" stop-color="#e51d2b" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- Deep ambient glow layer -->
-  <path d="M0 12H1774" stroke="url(#beam-glow)" stroke-width="7" opacity="0.6" filter="url(#crimson-glow)"/>
+  <!-- Full-width deep ambient glow (spans entire 1774 width) -->
+  <path d="M0 16H1774" stroke="url(#full-glow)" stroke-width="10" opacity="0.7" filter="url(#crimson-glow-strong)"/>
 
-  <!-- Focused scarlet aura -->
-  <path d="M80 12H1694" stroke="#ff2238" stroke-width="3.2" opacity="0.85" filter="url(#crimson-glow)"/>
+  <!-- Full-width focused scarlet beam -->
+  <path d="M0 16H1774" stroke="url(#full-glow)" stroke-width="4" opacity="0.95" filter="url(#crimson-glow-strong)"/>
 
-  <!-- Razor sharp white-crimson core beam -->
-  <path d="M0 12H1774" stroke="url(#beam-core)" stroke-width="1.6"/>
+  <!-- Full-width white-crimson razor hot core -->
+  <path d="M0 16H1774" stroke="url(#full-core)" stroke-width="2"/>
 
-  <!-- Center Berserk Sigil: Glowing diamond ember with side sparks -->
-  <!-- Center flare bloom -->
-  <circle cx="887" cy="12" r="11" fill="url(#center-burst)" filter="url(#crimson-glow)"/>
+  <!-- White-hot center filament -->
+  <line x1="600" y1="16" x2="1174" y2="16" stroke="#ffffff" stroke-width="1" opacity="0.85"/>
 
-  <!-- Center glowing diamond -->
-  <polygon points="887,4 894,12 887,20 880,12" fill="#ffffff" filter="url(#crimson-glow)"/>
-  <polygon points="887,5.5 892.5,12 887,18.5 881.5,12" fill="#ff2238"/>
-  <polygon points="887,8 890,12 887,16 884,12" fill="#ffffff"/>
+  <!-- Left Side Design: Berserk Manga Panel Brackets & Hard Edge End Cap -->
+  <polygon points="0,4 10,4 10,28 0,28" fill="#e51d2b"/>
+  <line x1="0" y1="4" x2="140" y2="4" stroke="#ff3345" stroke-width="1.2" opacity="0.75"/>
+  <line x1="0" y1="28" x2="140" y2="28" stroke="#ff3345" stroke-width="1.2" opacity="0.75"/>
+  <path d="M0 4L38 4L54 16L38 28L0 28" fill="none" stroke="url(#bracket-grad-left)" stroke-width="2" filter="url(#crimson-glow-strong)"/>
+  <path d="M0 8L26 8L36 16L26 24L0 24" fill="none" stroke="#ff2238" stroke-width="1.4"/>
+  <polygon points="74,8 82,16 74,24 66,16" fill="#ffffff" filter="url(#crimson-glow-strong)"/>
+  <polygon points="74,10.5 79.5,16 74,21.5 68.5,16" fill="#ff2238"/>
+  <polygon points="108,11 113,16 108,21 103,16" fill="#ff4d5e" filter="url(#crimson-glow-strong)"/>
+  <line x1="20" y1="2" x2="32" y2="30" stroke="#ff3345" stroke-width="1.2" opacity="0.85"/>
+  <line x1="32" y1="2" x2="44" y2="30" stroke="#ff3345" stroke-width="1" opacity="0.7"/>
+  <line x1="44" y1="2" x2="56" y2="30" stroke="#ff3345" stroke-width="0.8" opacity="0.5"/>
 
-  <!-- Left accent diamond -->
-  <polygon points="835,8 839,12 835,16 831,12" fill="#ff3345" filter="url(#crimson-glow)"/>
-  <polygon points="835,9.5 837.5,12 835,14.5 832.5,12" fill="#ffffff"/>
+  <!-- Right Side Design: Berserk Manga Panel Brackets & Hard Edge End Cap -->
+  <polygon points="1774,4 1764,4 1764,28 1774,28" fill="#e51d2b"/>
+  <line x1="1634" y1="4" x2="1774" y2="4" stroke="#ff3345" stroke-width="1.2" opacity="0.75"/>
+  <line x1="1634" y1="28" x2="1774" y2="28" stroke="#ff3345" stroke-width="1.2" opacity="0.75"/>
+  <path d="M1774 4L1736 4L1720 16L1736 28L1774 28" fill="none" stroke="url(#bracket-grad-right)" stroke-width="2" filter="url(#crimson-glow-strong)"/>
+  <path d="M1774 8L1748 8L1738 16L1748 24L1774 24" fill="none" stroke="#ff2238" stroke-width="1.4"/>
+  <polygon points="1700,8 1708,16 1700,24 1692,16" fill="#ffffff" filter="url(#crimson-glow-strong)"/>
+  <polygon points="1700,10.5 1705.5,16 1700,21.5 1694.5,16" fill="#ff2238"/>
+  <polygon points="1666,11 1671,16 1666,21 1661,16" fill="#ff4d5e" filter="url(#crimson-glow-strong)"/>
+  <line x1="1754" y1="2" x2="1742" y2="30" stroke="#ff3345" stroke-width="1.2" opacity="0.85"/>
+  <line x1="1742" y1="2" x2="1730" y2="30" stroke="#ff3345" stroke-width="1" opacity="0.7"/>
+  <line x1="1730" y1="2" x2="1718" y2="30" stroke="#ff3345" stroke-width="0.8" opacity="0.5"/>
 
-  <!-- Right accent diamond -->
-  <polygon points="939,8 943,12 939,16 935,12" fill="#ff3345" filter="url(#crimson-glow)"/>
-  <polygon points="939,9.5 941.5,12 939,14.5 936.5,12" fill="#ffffff"/>
+  <!-- Center Berserk Sigil: Glowing Behelit/Brand Diamond Flare -->
+  <circle cx="887" cy="16" r="14" fill="url(#center-flare)" filter="url(#crimson-glow-strong)"/>
+  <polygon points="887,4 897,16 887,28 877,16" fill="#ffffff" filter="url(#crimson-glow-strong)"/>
+  <polygon points="887,6.5 894.5,16 887,25.5 879.5,16" fill="#ff2238"/>
+  <polygon points="887,10 892,16 887,22 882,16" fill="#ffffff"/>
 
-  <!-- Secondary manga slash lines -->
-  <path d="M720 9L850 11" stroke="#ff3345" stroke-width="0.8" opacity="0.7"/>
-  <path d="M924 13L1054 15" stroke="#ff3345" stroke-width="0.8" opacity="0.7"/>
+  <!-- Left Accent Diamond -->
+  <polygon points="835,10 841,16 835,22 829,16" fill="#ff3345" filter="url(#crimson-glow-strong)"/>
+  <polygon points="835,12 839,16 835,20 831,16" fill="#ffffff"/>
+
+  <!-- Right Accent Diamond -->
+  <polygon points="939,10 945,16 939,22 933,16" fill="#ff3345" filter="url(#crimson-glow-strong)"/>
+  <polygon points="939,12 943,16 939,20 935,16" fill="#ffffff"/>
+
+  <!-- Dynamic Manga Slash Accents -->
+  <path d="M720 12L845 15" stroke="#ff3345" stroke-width="1.2" opacity="0.8"/>
+  <path d="M929 17L1054 20" stroke="#ff3345" stroke-width="1.2" opacity="0.8"/>
 </svg>

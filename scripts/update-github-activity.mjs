@@ -190,15 +190,22 @@ function makeHeatmap(calendar) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="GitHub contribution heatmap for ${username}">
   <defs>
-    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.1"/>
-      <stop offset="12%" stop-color="#e51d2b" stop-opacity="0.8"/>
+    <linearGradient id="rule-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="10%" stop-color="#ff2238" stop-opacity="0.9"/>
       <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
-      <stop offset="88%" stop-color="#e51d2b" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.1"/>
+      <stop offset="90%" stop-color="#ff2238" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.3"/>
     </linearGradient>
-    <filter id="soft-glow" x="-5%" y="-100%" width="110%" height="300%">
-      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+    <linearGradient id="rule-core" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.4"/>
+      <stop offset="15%" stop-color="#ff2238" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff7582" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#ff2238" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="header-glow" x="-5%" y="-300%" width="110%" height="700%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -207,9 +214,11 @@ function makeHeatmap(calendar) {
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="${contentLeft}" y="52">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan><tspan class="meta-unit"> contributions</tspan><tspan class="meta-bullet"> · </tspan><tspan class="meta-badge">${updateStamp}</tspan></text>
-  <path d="M${contentLeft} 70H${contentRight}" stroke="#e51d2b" stroke-width="2.2" opacity="0.45" filter="url(#soft-glow)"/>
-  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule)" stroke-width="1.2"/>
+  <text class="meta" x="${contentRight}" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
+  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
+  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
+  <path d="M${contentLeft} 70H${contentRight}" stroke="url(#rule-core)" stroke-width="1.8"/>
+  <path d="M${contentLeft + 100} 70H${contentRight - 100}" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
   <g class="months">${monthLabels.join('')}</g>
   <g class="weekdays">
     <text class="weekday" x="${weekdayAnchorX}" y="167" text-anchor="end">MON</text>
@@ -227,12 +236,11 @@ function makeHeatmap(calendar) {
     <text class="legend-text" x="151" y="0">MORE</text>
   </g>
   <style>
-    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Noto Sans", Helvetica, Arial, sans-serif; }
-    .eyebrow { fill: #f1ede1; font-size: 21px; font-weight: 700; letter-spacing: 1.8px; }
-    .meta-count { fill: #f1ede1; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
-    .meta-unit { fill: #aaa1a4; font-size: 15px; font-weight: 500; letter-spacing: 0.5px; }
-    .meta-bullet { fill: #541920; font-size: 16px; font-weight: 700; }
-    .meta-badge { fill: #e51d2b; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; }
+    .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
+    .meta-count { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
+    .meta-unit { fill: #9e9598; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
+    .meta-badge { fill: #ff2238; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
     .month { fill: #b4abb0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
     .weekday { fill: #7d7377; font-size: 13px; font-weight: 600; letter-spacing: 0.7px; }
     .legend-text { fill: #7d7377; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; }
@@ -307,26 +315,55 @@ function makeActivityGraph(calendar) {
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Weekly GitHub activity graph for ${username}">
   <defs>
-    <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e51d2b" stop-opacity=".36"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient>
-    <linearGradient id="rule" x1="0" x2="1"><stop stop-color="#e51d2b" stop-opacity="0"/><stop offset=".5" stop-color="#e51d2b" stop-opacity=".85"/><stop offset="1" stop-color="#e51d2b" stop-opacity="0"/></linearGradient>
+    <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#e51d2b" stop-opacity=".42"/>
+      <stop offset="0.6" stop-color="#e51d2b" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#e51d2b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rule-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.3"/>
+      <stop offset="10%" stop-color="#ff2238" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ff3345" stop-opacity="1"/>
+      <stop offset="90%" stop-color="#ff2238" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="rule-core" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e51d2b" stop-opacity="0.4"/>
+      <stop offset="15%" stop-color="#ff2238" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff7582" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#ff2238" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e51d2b" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="header-glow" x="-5%" y="-300%" width="110%" height="700%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
-  <rect width="100%" height="100%" rx="14" fill="#080708"/>
-  <text class="eyebrow" x="44" y="54">ACTIVITY TRACE · LAST 12 MONTHS</text>
-  <text class="meta" x="${width - 44}" y="54" text-anchor="end">${total.toLocaleString('en-US')} CONTRIBUTIONS · PEAK WEEK ${peak} · ${updateStamp}</text>
-  <path d="M44 72H${width - 44}" stroke="url(#rule)" stroke-width="1.5"/>
+  <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
+  <text class="eyebrow" x="40" y="52">ACTIVITY TRACE · LAST 12 MONTHS</text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">PEAK ${peak}/WK</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
+  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
+  <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
+  <path d="M40 70H1734" stroke="url(#rule-core)" stroke-width="1.8"/>
+  <path d="M140 70H1634" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
   <g>${grid}</g>
   <path d="${area}" fill="url(#area-fill)"/>
   <path d="${line}" fill="none" stroke="#f12638" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <g>${hoverTargets}</g>
   <g>${pointsMarkup}</g>
   <g>${monthLabels.join('')}</g>
-  <text class="footer" x="${width - 44}" y="${height - 26}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
+  <text class="footer" x="1734" y="${height - 26}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:18px;letter-spacing:.8px}
-    .eyebrow{fill:#f1ede1;font-size:25px;font-weight:700;letter-spacing:1.5px}
-    .meta{fill:#b7aeb1;font-size:16px;letter-spacing:.6px}
-    .y-label,.x-label{font-size:17px;letter-spacing:.5px}
-    .footer{font-size:16px;letter-spacing:.9px}
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; fill: #aaa1a4; font-size: 18px; letter-spacing: .8px; }
+    .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
+    .meta-count { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
+    .meta-unit { fill: #9e9598; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
+    .meta-badge { fill: #ff2238; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
+    .y-label, .x-label { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 0.8px; }
+    .footer { fill: #7d7377; font-size: 14px; font-weight: 600; letter-spacing: 1.2px; }
   </style>
 </svg>`;
 }
