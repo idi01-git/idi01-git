@@ -85,7 +85,7 @@ async function fetchCalendar() {
           isCached: true,
         };
       }
-    } catch {}
+    } catch { }
     throw new Error('GITHUB_TOKEN is required to fetch the public contribution calendar.');
   }
 
@@ -371,7 +371,7 @@ function makeActivityGraph(calendar) {
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">ACTIVITY TRACE · LAST 12 MONTHS</text>
-  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">${total.toLocaleString('en-US')}</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">PEAK ${peak}/WK</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-peak">PEAK ${peak}/WK</tspan>   <tspan class="meta-badge">${updateStamp}</tspan></text>
   <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
   <path d="M40 70 Q887 62 1734 70 Q887 78 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
   <path d="M40 70 Q887 66.5 1734 70 Q887 73.5 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
@@ -387,6 +387,7 @@ function makeActivityGraph(calendar) {
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Arial Black", sans-serif; fill: #aaa1a4; font-size: 18px; letter-spacing: .8px; }
     .eyebrow { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 2.2px; }
+    .meta-peak { fill: #ff2238; font-size: 16px; font-weight: 800; letter-spacing: 1.4px; }
     .meta-count { fill: #f1ede1; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; }
     .meta-unit { fill: #9e9598; font-size: 16px; font-weight: 400; letter-spacing: 0.5px; }
     .meta-badge { fill: #ff2238; font-size: 14px; font-weight: 700; letter-spacing: 1.2px; }
