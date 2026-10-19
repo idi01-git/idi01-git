@@ -82,7 +82,7 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-labelledby="title description">
   <title id="title">Shivang's competitive programming stats</title>
   <desc id="description">A code-generated SVG overlay on the Berserk-themed art, with live values supplied by the stats updater.</desc>
-  <image x="0" y="0" width="1774" height="887" preserveAspectRatio="none" href="data:${mimeType};base64,${imageData}" xlink:href="data:${mimeType};base64,${imageData}" />
+  <image x="0" y="0" width="1774" height="887" preserveAspectRatio="none" xlink:href="data:${mimeType};base64,${imageData}" />
   ${updatedBody}
 </svg>
 `;
