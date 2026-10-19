@@ -13,7 +13,7 @@
 <img src="./assets/divider-red.svg" width="100%" height="4" style="display:block;width:100%;height:4px;" alt="" />
 <img src="https://streak-stats.demolab.com?user=idi01-git&amp;hide_border=true&amp;background=000000&amp;stroke=E51D2B&amp;ring=E51D2B&amp;fire=E51D2B&amp;currStreakNum=F1EDE1&amp;sideNums=F1EDE1&amp;currStreakLabel=E51D2B&amp;sideLabels=F1EDE1&amp;dates=F1EDE1" width="100%" style="display:block;width:100%;height:auto;" alt="GitHub contribution streak" />
 <img src="./assets/divider-red.svg" width="100%" height="4" style="display:block;width:100%;height:4px;" alt="" />
-<img src="./assets/github-contribution-heatmap.svg" width="100%" style="display:block;width:100%;height:auto;" alt="Code-generated GitHub contribution heatmap in crimson" />
+<img src="./assets/github-contribution-heatmap.svg?v=39246877884" width="100%" style="display:block;width:100%;height:auto;" alt="Code-generated GitHub contribution heatmap in crimson" />
 <img src="./assets/divider-red.svg" width="100%" height="4" style="display:block;width:100%;height:4px;" alt="" />
-<img src="./assets/github-activity-graph.svg" width="100%" style="display:block;width:100%;height:auto;" alt="Code-generated GitHub activity graph in crimson and monochrome" />
+<img src="./assets/github-activity-graph.svg?v=39246877884" width="100%" style="display:block;width:100%;height:auto;" alt="Code-generated GitHub activity graph in crimson and monochrome" />
 </div>
