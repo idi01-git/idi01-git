@@ -101,16 +101,16 @@ async function fetchCalendar() {
 
 function makeHeatmap(calendar) {
   const width = 1774;
-  const height = 264;
-  const cell = 17;
-  const gap = 7;
+  const height = 360;
+  const cell = 22;
+  const gap = 8;
   const pitch = cell + gap;
   const columns = Math.ceil(calendar.days.length / 7);
   const gridWidth = columns * pitch - gap;
   const left = Math.round((width - gridWidth) / 2);
-  const top = 88;
+  const top = 104;
   const max = Math.max(1, ...calendar.days.map((day) => day.contributionCount));
-  const colors = ['#171316', '#3a1016', '#71131d', '#b21c29', '#f12a39'];
+  const colors = ['#211c1e', '#50121a', '#861722', '#c51e2c', '#ff3345'];
   const cells = calendar.days.map((day) => {
     const date = new Date(`${day.date}T00:00:00Z`);
     const sunday = new Date(date);
@@ -132,13 +132,13 @@ function makeHeatmap(calendar) {
     const month = date.toLocaleString('en', { month: 'short', timeZone: 'UTC' });
     if (date.getUTCDate() <= 7 && month !== lastMonth) {
       const week = Math.floor((date - new Date(`${calendar.days[0].date}T00:00:00Z`)) / (7 * 86_400_000));
-      monthLabels.push(`<text x="${left + week * pitch}" y="70">${month.toUpperCase()}</text>`);
+      monthLabels.push(`<text x="${left + week * pitch}" y="84">${month.toUpperCase()}</text>`);
       lastMonth = month;
     }
   });
   const weekdays = [
     ['MON', 1], ['WED', 3], ['FRI', 5],
-  ].map(([label, day]) => `<text class="weekday" x="${left - 20}" y="${top + day * pitch + 13}" text-anchor="end">${label}</text>`).join('\n    ');
+  ].map(([label, day]) => `<text class="weekday" x="${left - 14}" y="${top + day * pitch + 15}" text-anchor="end">${label}</text>`).join('\n    ');
   const total = Number(calendar.totalContributions ?? calendar.days.reduce((sum, day) => sum + day.contributionCount, 0));
   const updateStamp = previewMode ? 'PREVIEW DATA' : emptyMode ? 'FIRST LIVE REFRESH PENDING' : `UPDATED ${new Date().toISOString().slice(0, 10)}`;
 
@@ -151,14 +151,15 @@ function makeHeatmap(calendar) {
   <g class="months">${monthLabels.join('')}</g>
   <g>${weekdays}</g>
   <g>${cells}</g>
-  <g class="legend" transform="translate(${width - 238},${height - 20})">
-    <text x="0" y="0">LESS</text><rect x="43" y="-11" width="13" height="13" rx="3" fill="${colors[0]}"/><rect x="62" y="-11" width="13" height="13" rx="3" fill="${colors[1]}"/><rect x="81" y="-11" width="13" height="13" rx="3" fill="${colors[2]}"/><rect x="100" y="-11" width="13" height="13" rx="3" fill="${colors[3]}"/><rect x="119" y="-11" width="13" height="13" rx="3" fill="${colors[4]}"/><text x="141" y="0">MORE</text>
+  <g class="legend" transform="translate(${width - 250},${height - 18})">
+    <text x="0" y="0">LESS</text><rect x="50" y="-14" width="16" height="16" rx="3" fill="${colors[0]}"/><rect x="73" y="-14" width="16" height="16" rx="3" fill="${colors[1]}"/><rect x="96" y="-14" width="16" height="16" rx="3" fill="${colors[2]}"/><rect x="119" y="-14" width="16" height="16" rx="3" fill="${colors[3]}"/><rect x="142" y="-14" width="16" height="16" rx="3" fill="${colors[4]}"/><text x="170" y="0">MORE</text>
   </g>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#817b7e;font-size:10px;letter-spacing:1.35px}
-    .eyebrow{fill:#f1ede1;font-size:13px;font-weight:700;letter-spacing:2.3px}
-    .meta{font-size:10px;letter-spacing:1.15px}
-    .weekday{font-size:8px;letter-spacing:.8px}
+    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:17px;letter-spacing:1px}
+    .eyebrow{fill:#f1ede1;font-size:22px;font-weight:700;letter-spacing:1.8px}
+    .meta{fill:#b7aeb1;font-size:15px;letter-spacing:.8px}
+    .months{font-weight:700}
+    .weekday{font-size:14px;letter-spacing:.5px}
   </style>
 </svg>`;
 }
@@ -179,8 +180,8 @@ function smoothPath(points) {
 
 function makeActivityGraph(calendar) {
   const width = 1774;
-  const height = 340;
-  const plot = { x: 96, y: 94, width: width - 150, height: 190 };
+  const height = 410;
+  const plot = { x: 112, y: 100, width: width - 170, height: 245 };
   const weekly = new Map();
   calendar.days.forEach((day) => {
     const date = new Date(`${day.date}T00:00:00Z`);
@@ -223,10 +224,10 @@ function makeActivityGraph(calendar) {
   const hoverTargets = points.map((point) => {
     const weekOf = new Date(point.weekStart).toISOString().slice(0, 10);
     const unit = point.count === 1 ? 'contribution' : 'contributions';
-    return `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="8" fill="transparent"><title>Week of ${weekOf}: ${point.count} ${unit}</title></circle>`;
+    return `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="10" fill="transparent"><title>Week of ${weekOf}: ${point.count} ${unit}</title></circle>`;
   }).join('\n    ');
   const pointsMarkup = points.filter((point, index) => index % 5 === 0 || index === points.length - 1)
-    .map((point) => `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="3.2" fill="#f1ede1" stroke="#e51d2b" stroke-width="2"/>`).join('\n    ');
+    .map((point) => `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="4.6" fill="#f1ede1" stroke="#e51d2b" stroke-width="2.5"/>`).join('\n    ');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="Weekly GitHub activity graph for ${username}">
   <defs>
@@ -239,17 +240,17 @@ function makeActivityGraph(calendar) {
   <path d="M44 54H${width - 44}" stroke="url(#rule)" stroke-width="1"/>
   <g>${grid}</g>
   <path d="${area}" fill="url(#area-fill)"/>
-  <path d="${line}" fill="none" stroke="#e51d2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="${line}" fill="none" stroke="#f12638" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   <g>${hoverTargets}</g>
   <g>${pointsMarkup}</g>
   <g>${monthLabels.join('')}</g>
-  <text class="footer" x="${width - 44}" y="${height - 17}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
+  <text class="footer" x="${width - 44}" y="${height - 18}" text-anchor="end">WEEKLY CONTRIBUTIONS</text>
   <style>
-    text{font-family:Arial,Helvetica,sans-serif;fill:#817b7e;font-size:10px;letter-spacing:1.25px}
-    .eyebrow{fill:#f1ede1;font-size:13px;font-weight:700;letter-spacing:2.3px}
-    .meta{font-size:10px;letter-spacing:1.05px}
-    .y-label,.x-label{font-size:9px;letter-spacing:1px}
-    .footer{font-size:9px;letter-spacing:1.6px}
+    text{font-family:Arial,Helvetica,sans-serif;fill:#aaa1a4;font-size:17px;letter-spacing:.9px}
+    .eyebrow{fill:#f1ede1;font-size:22px;font-weight:700;letter-spacing:1.8px}
+    .meta{fill:#b7aeb1;font-size:15px;letter-spacing:.7px}
+    .y-label,.x-label{font-size:15px;letter-spacing:.6px}
+    .footer{font-size:15px;letter-spacing:1px}
   </style>
 </svg>`;
 }
