@@ -24,7 +24,7 @@
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">249</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">UPDATED 2026-10-19</tspan></text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">250</tspan> <tspan class="meta-unit">contributions</tspan>   <tspan class="meta-badge">UPDATED 2026-10-19</tspan></text>
   <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="6" opacity="0.8" filter="url(#header-glow)"/>
   <path d="M40 70H1734" stroke="url(#rule-glow)" stroke-width="3" opacity="0.95"/>
   <path d="M40 70H1734" stroke="url(#rule-core)" stroke-width="1.8"/>
@@ -385,7 +385,7 @@
     <rect x="1618" y="244" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-01</title></rect>
     <rect x="1618" y="275" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-02</title></rect>
     <rect x="1618" y="306" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-03</title></rect>
-    <rect x="1649" y="120" width="23" height="23" rx="4.5" fill="#ff3648"><title>7 contributions on 2026-10-04</title></rect>
+    <rect x="1649" y="120" width="23" height="23" rx="4.5" fill="#cb1b2a"><title>7 contributions on 2026-10-04</title></rect>
     <rect x="1649" y="151" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-05</title></rect>
     <rect x="1649" y="182" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-06</title></rect>
     <rect x="1649" y="213" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-07</title></rect>
@@ -400,7 +400,7 @@
     <rect x="1680" y="275" width="23" height="23" rx="4.5" fill="#ff3648"><title>45 contributions on 2026-10-16</title></rect>
     <rect x="1680" y="306" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-17</title></rect>
     <rect x="1711" y="120" width="23" height="23" rx="4.5" fill="#cb1b2a"><title>3 contributions on 2026-10-18</title></rect>
-    <rect x="1711" y="151" width="23" height="23" rx="4.5" fill="#ff3648"><title>7 contributions on 2026-10-19</title></rect></g>
+    <rect x="1711" y="151" width="23" height="23" rx="4.5" fill="#ff3648"><title>8 contributions on 2026-10-19</title></rect></g>
   <g class="legend" transform="translate(1543, 356)">
     <text class="legend-text" x="0" y="0">LESS</text>
     <rect x="42" y="-12" width="15" height="15" rx="3.5" fill="#171316"/>
