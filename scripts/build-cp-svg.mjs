@@ -98,10 +98,10 @@ const codechefCard = updatedBody.match(/<a id="codechef-link"[\s\S]*?<\/a>/)?.[0
 const codeforcesCard = updatedBody.match(/<a id="codeforces-link"[\s\S]*?<\/a>/)?.[0] || '';
 
 function getSliceInfo(name) {
-  const webpPath = path.join(assetsDir, `cp-bg-${name}.webp`);
-  if (existsSync(webpPath)) return { path: webpPath, mime: 'image/webp' };
   const jpgPath = path.join(assetsDir, `cp-bg-${name}.jpg`);
   if (existsSync(jpgPath)) return { path: jpgPath, mime: 'image/jpeg' };
+  const webpPath = path.join(assetsDir, `cp-bg-${name}.webp`);
+  if (existsSync(webpPath)) return { path: webpPath, mime: 'image/webp' };
   return null;
 }
 
