@@ -11,39 +11,48 @@
   </defs>
 
   <!-- LeetCode card overlay; centered on the first blank card. -->
-  <g id="leetcode-card" transform="translate(194 0)">
-    <image x="-33" y="500" width="66" height="78" href="__LEETCODE_LOGO__" xlink:href="__LEETCODE_LOGO__" preserveAspectRatio="xMidYMid meet"/>
-    <text class="brand-name" x="0" y="608" text-anchor="middle">LeetCode</text>
-    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
-    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
-    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
-    <text class="metric-value" id="leetcode-solved" x="-60" y="720" text-anchor="middle">—</text>
-    <text class="metric-value" id="leetcode-rating" x="62" y="720" text-anchor="middle">—</text>
-  </g>
+  <a id="leetcode-link" href="https://leetcode.com/u/idi01/" xlink:href="https://leetcode.com/u/idi01/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode Profile">
+    <g id="leetcode-card" transform="translate(194 0)">
+      <polygon points="-94,485 94,485 174,565 174,800 94,880 -94,880 -174,800 -174,565" fill="#000000" fill-opacity="0.001" pointer-events="all" cursor="pointer"/>
+      <image x="-33" y="500" width="66" height="78" href="__LEETCODE_LOGO__" xlink:href="__LEETCODE_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+      <text class="brand-name" x="0" y="608" text-anchor="middle">LeetCode</text>
+      <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+      <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+      <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+      <text class="metric-value" id="leetcode-solved" x="-60" y="720" text-anchor="middle">—</text>
+      <text class="metric-value" id="leetcode-rating" x="62" y="720" text-anchor="middle">—</text>
+    </g>
+  </a>
 
   <!-- CodeChef card overlay; centered on the second blank card. -->
-  <g id="codechef-card" transform="translate(535 0)">
-    <image x="-34" y="505" width="68" height="68" href="__CODECHEF_LOGO__" xlink:href="__CODECHEF_LOGO__" preserveAspectRatio="xMidYMid meet"/>
-    <text class="brand-name" x="0" y="608" text-anchor="middle">CodeChef</text>
-    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
-    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
-    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
-    <text class="metric-value" id="codechef-solved" x="-60" y="720" text-anchor="middle">—</text>
-    <text class="metric-value" id="codechef-rating" x="62" y="720" text-anchor="middle">—</text>
-  </g>
+  <a id="codechef-link" href="https://www.codechef.com/users/idi01" xlink:href="https://www.codechef.com/users/idi01" target="_blank" rel="noopener noreferrer" aria-label="CodeChef Profile">
+    <g id="codechef-card" transform="translate(535 0)">
+      <polygon points="-94,485 94,485 174,565 174,800 94,880 -94,880 -174,800 -174,565" fill="#000000" fill-opacity="0.001" pointer-events="all" cursor="pointer"/>
+      <image x="-34" y="505" width="68" height="68" href="__CODECHEF_LOGO__" xlink:href="__CODECHEF_LOGO__" preserveAspectRatio="xMidYMid meet"/>
+      <text class="brand-name" x="0" y="608" text-anchor="middle">CodeChef</text>
+      <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+      <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+      <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+      <text class="metric-value" id="codechef-solved" x="-60" y="720" text-anchor="middle">—</text>
+      <text class="metric-value" id="codechef-rating" x="62" y="720" text-anchor="middle">—</text>
+    </g>
+  </a>
 
   <!-- Codeforces card overlay; centered on the third blank card. -->
-  <g id="codeforces-card" transform="translate(859 0)">
-    <svg x="-40" y="505" width="80" height="66" viewBox="0 0 200 151" role="img" aria-label="Codeforces logo">
-      <rect x="0" y="41" width="51" height="108" rx="13" fill="#f9cf59"/>
-      <rect x="69" y="0" width="51" height="149" rx="13" fill="#188dcc"/>
-      <rect x="137" y="56" width="51" height="93" rx="13" fill="#b81d25"/>
-    </svg>
-    <text class="brand-name" x="0" y="608" text-anchor="middle">Codeforces</text>
-    <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
-    <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
-    <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
-    <text class="metric-value" id="codeforces-solved" x="-60" y="720" text-anchor="middle">—</text>
-    <text class="metric-value" id="codeforces-rating" x="62" y="720" text-anchor="middle">—</text>
-  </g>
+  <a id="codeforces-link" href="https://codeforces.com/profile/idi01" xlink:href="https://codeforces.com/profile/idi01" target="_blank" rel="noopener noreferrer" aria-label="Codeforces Profile">
+    <g id="codeforces-card" transform="translate(859 0)">
+      <polygon points="-94,485 94,485 174,565 174,800 94,880 -94,880 -174,800 -174,565" fill="#000000" fill-opacity="0.001" pointer-events="all" cursor="pointer"/>
+      <svg x="-40" y="505" width="80" height="66" viewBox="0 0 200 151" role="img" aria-label="Codeforces logo">
+        <rect x="0" y="41" width="51" height="108" rx="13" fill="#f9cf59"/>
+        <rect x="69" y="0" width="51" height="149" rx="13" fill="#188dcc"/>
+        <rect x="137" y="56" width="51" height="93" rx="13" fill="#b81d25"/>
+      </svg>
+      <text class="brand-name" x="0" y="608" text-anchor="middle">Codeforces</text>
+      <line class="hairline" x1="-102" y1="631" x2="102" y2="631"/>
+      <text class="metric-label" x="-60" y="670" text-anchor="middle">SOLVED</text>
+      <text class="metric-label" x="62" y="670" text-anchor="middle">RATING</text>
+      <text class="metric-value" id="codeforces-solved" x="-60" y="720" text-anchor="middle">—</text>
+      <text class="metric-value" id="codeforces-rating" x="62" y="720" text-anchor="middle">—</text>
+    </g>
+  </a>
 </svg>

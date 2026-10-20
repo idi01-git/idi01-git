@@ -90,3 +90,55 @@ const svg = `<?xml version="1.0" encoding="UTF-8"?>
 await writeFile(outputPath, svg, 'utf8');
 console.log(`Wrote ${path.relative(projectRoot, outputPath)}`);
 
+// Also generate individual sliced card SVGs for interactive README layout
+const defsMatch = updatedBody.match(/<defs>[\s\S]*?<\/defs>/);
+const defs = defsMatch ? defsMatch[0] : '';
+const leetcodeCard = updatedBody.match(/<a id="leetcode-link"[\s\S]*?<\/a>/)?.[0] || '';
+const codechefCard = updatedBody.match(/<a id="codechef-link"[\s\S]*?<\/a>/)?.[0] || '';
+const codeforcesCard = updatedBody.match(/<a id="codeforces-link"[\s\S]*?<\/a>/)?.[0] || '';
+
+const sliceBgPaths = {
+  leetcode: path.join(assetsDir, 'cp-bg-leetcode.jpg'),
+  codechef: path.join(assetsDir, 'cp-bg-codechef.jpg'),
+  codeforces: path.join(assetsDir, 'cp-bg-codeforces.jpg'),
+};
+
+if (existsSync(sliceBgPaths.leetcode) && existsSync(sliceBgPaths.codechef) && existsSync(sliceBgPaths.codeforces)) {
+  const [lcBg, ccBg, cfBg] = await Promise.all([
+    readFile(sliceBgPaths.leetcode),
+    readFile(sliceBgPaths.codechef),
+    readFile(sliceBgPaths.codeforces),
+  ]);
+
+  const lcSvg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="365" height="887" viewBox="0 0 365 887" role="img" aria-label="LeetCode Stats">
+  ${defs}
+  <image x="0" y="0" width="365" height="887" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${lcBg.toString('base64')}" />
+  ${leetcodeCard}
+</svg>
+`;
+
+  const ccSvg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="335" height="887" viewBox="365 0 335 887" role="img" aria-label="CodeChef Stats">
+  ${defs}
+  <image x="365" y="0" width="335" height="887" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${ccBg.toString('base64')}" />
+  ${codechefCard}
+</svg>
+`;
+
+  const cfSvg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="335" height="887" viewBox="700 0 335 887" role="img" aria-label="Codeforces Stats">
+  ${defs}
+  <image x="700" y="0" width="335" height="887" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${cfBg.toString('base64')}" />
+  ${codeforcesCard}
+</svg>
+`;
+
+  await Promise.all([
+    writeFile(path.join(assetsDir, 'competitive-programming-leetcode.svg'), lcSvg, 'utf8'),
+    writeFile(path.join(assetsDir, 'competitive-programming-codechef.svg'), ccSvg, 'utf8'),
+    writeFile(path.join(assetsDir, 'competitive-programming-codeforces.svg'), cfSvg, 'utf8'),
+  ]);
+  console.log('Wrote sliced platform card SVGs: LeetCode, CodeChef, Codeforces');
+}
+
