@@ -97,23 +97,29 @@ const leetcodeCard = updatedBody.match(/<a id="leetcode-link"[\s\S]*?<\/a>/)?.[0
 const codechefCard = updatedBody.match(/<a id="codechef-link"[\s\S]*?<\/a>/)?.[0] || '';
 const codeforcesCard = updatedBody.match(/<a id="codeforces-link"[\s\S]*?<\/a>/)?.[0] || '';
 
-const sliceBgPaths = {
-  leetcode: path.join(assetsDir, 'cp-card-bg-lc.jpg'),
-  codechef: path.join(assetsDir, 'cp-card-bg-cc.jpg'),
-  codeforces: path.join(assetsDir, 'cp-card-bg-cf.jpg'),
+function getSliceInfo(name) {
+  const webpPath = path.join(assetsDir, `cp-card-bg-${name}.webp`);
+  if (existsSync(webpPath)) return { path: webpPath, mime: 'image/webp' };
+  return { path: path.join(assetsDir, `cp-card-bg-${name}.jpg`), mime: 'image/jpeg' };
+}
+
+const sliceInfo = {
+  leetcode: getSliceInfo('lc'),
+  codechef: getSliceInfo('cc'),
+  codeforces: getSliceInfo('cf'),
 };
 
-if (existsSync(sliceBgPaths.leetcode) && existsSync(sliceBgPaths.codechef) && existsSync(sliceBgPaths.codeforces)) {
+if (existsSync(sliceInfo.leetcode.path) && existsSync(sliceInfo.codechef.path) && existsSync(sliceInfo.codeforces.path)) {
   const [lcBg, ccBg, cfBg] = await Promise.all([
-    readFile(sliceBgPaths.leetcode),
-    readFile(sliceBgPaths.codechef),
-    readFile(sliceBgPaths.codeforces),
+    readFile(sliceInfo.leetcode.path),
+    readFile(sliceInfo.codechef.path),
+    readFile(sliceInfo.codeforces.path),
   ]);
 
   const lcSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="365" height="423" viewBox="0 464 365 423" role="img" aria-label="LeetCode Stats">
   ${defs}
-  <image x="0" y="464" width="365" height="423" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${lcBg.toString('base64')}" />
+  <image x="0" y="464" width="365" height="423" preserveAspectRatio="none" xlink:href="data:${sliceInfo.leetcode.mime};base64,${lcBg.toString('base64')}" />
   ${leetcodeCard}
 </svg>
 `;
@@ -121,7 +127,7 @@ if (existsSync(sliceBgPaths.leetcode) && existsSync(sliceBgPaths.codechef) && ex
   const ccSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="335" height="423" viewBox="365 464 335 423" role="img" aria-label="CodeChef Stats">
   ${defs}
-  <image x="365" y="464" width="335" height="423" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${ccBg.toString('base64')}" />
+  <image x="365" y="464" width="335" height="423" preserveAspectRatio="none" xlink:href="data:${sliceInfo.codechef.mime};base64,${ccBg.toString('base64')}" />
   ${codechefCard}
 </svg>
 `;
@@ -129,7 +135,7 @@ if (existsSync(sliceBgPaths.leetcode) && existsSync(sliceBgPaths.codechef) && ex
   const cfSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="335" height="423" viewBox="700 464 335 423" role="img" aria-label="Codeforces Stats">
   ${defs}
-  <image x="700" y="464" width="335" height="423" preserveAspectRatio="none" xlink:href="data:image/jpeg;base64,${cfBg.toString('base64')}" />
+  <image x="700" y="464" width="335" height="423" preserveAspectRatio="none" xlink:href="data:${sliceInfo.codeforces.mime};base64,${cfBg.toString('base64')}" />
   ${codeforcesCard}
 </svg>
 `;
