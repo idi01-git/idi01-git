@@ -37,7 +37,7 @@
   </defs>
   <rect width="100%" height="100%" rx="14" fill="#080708" stroke="#251619" stroke-width="1.2"/>
   <text class="eyebrow" x="40" y="52">CONTRIBUTION CALENDAR</text>
-  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">281</tspan><tspan class="meta-unit" dx="8">CONTRIBUTIONS</tspan><tspan class="meta-sep" dx="16">·</tspan><tspan class="meta-badge-label" dx="16">UPDATED</tspan><tspan class="meta-badge-date" dx="6">2026-10-22</tspan></text>
+  <text class="meta" x="1734" y="52" text-anchor="end"><tspan class="meta-count">287</tspan><tspan class="meta-unit" dx="8">CONTRIBUTIONS</tspan><tspan class="meta-sep" dx="16">·</tspan><tspan class="meta-badge-label" dx="16">UPDATED</tspan><tspan class="meta-badge-date" dx="6">2026-10-23</tspan></text>
   <line x1="40" y1="70" x2="1734" y2="70" stroke="#e51d2b" stroke-width="0.8" stroke-opacity="0.35"/>
   <path d="M40 70 Q887 62 1734 70 Q887 78 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.65"/>
   <path d="M40 70 Q887 66.5 1734 70 Q887 73.5 40 70 Z" fill="url(#taper-glow)" filter="url(#header-glow)" opacity="0.95"/>
@@ -49,8 +49,7 @@
     <text class="weekday" x="83" y="229" text-anchor="end">WED</text>
     <text class="weekday" x="83" y="291" text-anchor="end">FRI</text>
   </g>
-  <g class="cells"><rect x="99" y="213" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-22</title></rect>
-    <rect x="99" y="244" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-23</title></rect>
+  <g class="cells"><rect x="99" y="244" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-23</title></rect>
     <rect x="99" y="275" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-24</title></rect>
     <rect x="99" y="306" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-25</title></rect>
     <rect x="130" y="120" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2025-10-26</title></rect>
@@ -414,7 +413,8 @@
     <rect x="1711" y="151" width="23" height="23" rx="4.5" fill="#ff3648"><title>16 contributions on 2026-10-19</title></rect>
     <rect x="1711" y="182" width="23" height="23" rx="4.5" fill="#ff3648"><title>21 contributions on 2026-10-20</title></rect>
     <rect x="1711" y="213" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-21</title></rect>
-    <rect x="1711" y="244" width="23" height="23" rx="4.5" fill="#4c1018"><title>1 contribution on 2026-10-22</title></rect></g>
+    <rect x="1711" y="244" width="23" height="23" rx="4.5" fill="#cb1b2a"><title>7 contributions on 2026-10-22</title></rect>
+    <rect x="1711" y="275" width="23" height="23" rx="4.5" fill="#171316"><title>0 contributions on 2026-10-23</title></rect></g>
   <g class="legend" transform="translate(1543, 356)">
     <text class="legend-text" x="0" y="0">LESS</text>
     <rect x="42" y="-12" width="15" height="15" rx="3.5" fill="#171316"/>
